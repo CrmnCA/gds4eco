@@ -1,0 +1,55 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Geographic Data Science for Applied Economists"
+  author: "Dr. Carmen Cabrera-Arnau"
+  date: today
+  chapters:
+    - index.qmd
+    - part: "Introduction"
+      chapters:
+        - overview.qmd
+        - environPy.qmd
+        - download.qmd
+    - part: "Contents"
+      chapters:
+        - spatial-data.qmd
+        - geovisualisation.qmd
+        - spatial-feature-i.qmd
+        - spatial-feature-ii.qmd
+        - openstreetmap.qmd
+        - transport-costs.qmd
+        - web-mapping.qmd
+    - part: "Epilogue"
+      chapters:
+        - datasets.qmd
+        - references.qmd
+
+  page-footer:
+    left: |
+      Geographic Data Science for Applied Economists by Carmen Cabrera-Arnau.
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+  site-url:  https://pietrostefani.github.io/wma
+  repo-url: https://github.com/pietrostefani/gds
+  repo-actions: [edit]
+  sharing: [twitter, facebook]
+  cover-image: density_africa.jpg
+  cover-image-alt: |
+    Alternative text describing the book cover
+ 
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: 
+    - cosmo
+    - r4gds.scss
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
