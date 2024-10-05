@@ -6,7 +6,7 @@ This course provides an introduction to Geographic Data Science for applied econ
 
 The course has three primary aims:
 
--   Equip students with essential skills in Geographic Data Science (GDS), improving their statistical and numerical understanding and familirity with fundamental programming concepts and modern computational tools for GDS;
+-   Equip students with essential skills in Geographic Data Science (GDS), improving their statistical and numerical understanding and familiarity with fundamental programming concepts and modern computational tools for GDS;
 
 -   Offer a thorough overview of key methodologies used by Geographic Data Scientists, along with insights on how and when to apply them;
 

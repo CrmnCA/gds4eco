@@ -13,9 +13,9 @@ This block is all about understanding spatial data, both conceptually and practi
 
 -   [Chapter 3](https://geographicdata.science/book/notebooks/03_spatial_data.html) of the GDS Book [@reyABwolf], a sister chapter with a more applied perspective on how concepts are implemented in computer data structures.
 
-Additionally, parts of this block are based and sourced from chapters 2, 3 and 4 from the on-line course "A course in Geographic Data Science", by Dr Elisabetta Pietrostefani and Dr Carmen Cabrera-Arnau [@courseGDS-pietrostefani-cabrera]. This course also provides code in R.
+Additionally, parts of this block are based and sourced from Chapters 2, 3 and 4 from the on-line course "A course in Geographic Data Science", by Dr Elisabetta Pietrostefani and Dr Carmen Cabrera-Arnau [@courseGDS-pietrostefani-cabrera]. This course also provides code in R.
 
-## Data tables
+## Modules
 
 ```{python}
 import pandas
@@ -24,6 +24,8 @@ import xarray, rioxarray
 import contextily
 import matplotlib.pyplot as plt
 ```
+
+## Data
 
 If you want to read more about the data sources behind this dataset, head to the [Datasets](./data/datasets) section.
 
@@ -137,7 +139,7 @@ plt.show()
 ```{python}
 fig, ax = plt.subplots()
 lines.plot(linewidth=0.1, color="black", ax=ax)
-contextily.add_basemap(ax, crs=lines.crs)
+#contextily.add_basemap(ax, crs=lines.crs)
 plt.show()
 ```
 
