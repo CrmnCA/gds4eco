@@ -10,22 +10,22 @@ book:
     - index.qmd
     - part: "Introduction"
       chapters:
-        - overview.qmd
-        - environPy.qmd
-        - download.qmd
+        - quarto-notebooks/overview.qmd
+        - quarto-notebooks/environPy.qmd
+        - quarto-notebooks/download.qmd
     - part: "Contents"
       chapters:
-        - spatial-data.qmd
-        - geovisualisation.qmd
-        - spatial-feature-i.qmd
-        - spatial-feature-ii.qmd
-        - openstreetmap.qmd
-        # - transport-costs.qmd
+        - quarto-notebooks/spatial-data.qmd
+        - quarto-notebooks/geovisualisation.qmd
+        - quarto-notebooks/spatial-feature-i.qmd
+        - quarto-notebooks/spatial-feature-ii.qmd
+        - quarto-notebooks/openstreetmap.qmd
+        - quarto-notebooks/transport-costs.qmd
         # - web-mapping.qmd
     - part: "Epilogue"
       chapters:
-        - datasets.qmd
-        - references.qmd
+        - quarto-notebooks/datasets.qmd
+        - quarto-notebooks/references.qmd
 
   page-footer:
     left: |

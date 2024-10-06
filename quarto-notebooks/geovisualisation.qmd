@@ -1,0 +1,508 @@
+---
+format:
+  html:
+    code-fold: false
+jupyter: python3
+---
+
+# Geovisualisation {#sec-geovisualisation}
+
+This block is all about visualising statistical data on top of a geography. Although this task looks simple, there are a few technical and conceptual building blocks that it helps to understand before we try to make our own maps. Aim to complete the following readings by the time we get our hands on the keyboard:
+
+-   [Block D](https://darribas.org/gds_course/content/bD/concepts_D.html) of the GDS course [@darribas_gds_course], which provides an introduction to choropleths (statistical maps).
+-   This [Chapter](https://geographicdata.science/book/notebooks/05_choropleth.html) of the GDS Book [@reyABwolf] , discussing choropleths in more detail.
+
+Additionally, parts of this block are based and sourced from Chapters 2, 3 and 4 from the on-line course "A course in Geographic Data Science", by Dr Elisabetta Pietrostefani and Dr Carmen Cabrera-Arnau [@courseGDS-pietrostefani-cabrera]. This course also provides code in R.
+
+## Packages and modules
+
+```{python}
+import geopandas
+import xarray, rioxarray
+import contextily
+import seaborn as sns
+from pysal.viz import mapclassify as mc
+from legendgram import legendgram
+import matplotlib.pyplot as plt
+import palettable.matplotlib as palmpl
+from splot.mapping import vba_choropleth
+```
+
+## Data
+
+If you want to read more about the data sources behind this dataset, head to the [Datasets](./data/datasets) section.
+
+Assuming you have the file locally on the path `../data/`:
+
+```{python}
+db = geopandas.read_file("../data/cambodia_regional.gpkg")
+```
+
+Quick visualisation:
+
+```{python}
+fig, ax = plt.subplots()
+db.to_crs(
+    epsg=3857
+).plot(
+    edgecolor="red",
+    facecolor="none",
+    linewidth=2,
+    alpha=0.25,
+    figsize=(9, 9),
+    ax=ax
+)
+contextily.add_basemap(
+    ax,
+    source=contextily.providers.Esri.NatGeoWorldMap
+)
+ax.set_axis_off()
+
+plt.show()
+```
+
+```{python}
+db.info()
+```
+
+We will use the average measurement of [nitrogen dioxide](http://www.tropomi.eu/data-products/nitrogen-dioxide) (`no2_mean`) by region throughout the block.
+
+To make visualisation a bit easier below, we create an additional column with values rescaled:
+
+```{python}
+db["no2_viz"] = db["no2_mean"] * 1e5
+```
+
+This way, numbers are larger and will fit more easily on legends:
+
+```{python}
+db[["no2_mean", "no2_viz"]].describe()
+```
+
+## Choropleths
+
+```{python}
+fig, ax = plt.subplots()
+db.to_crs(
+    epsg=3857
+).plot(
+    "no2_viz", 
+    legend=True,
+    figsize=(12, 9),
+    ax=ax
+)
+
+contextily.add_basemap(
+    ax, 
+    source=contextily.providers.CartoDB.VoyagerOnlyLabels,
+    zoom=7
+)
+
+plt.show()
+```
+
+### A classiffication problem
+
+```{python}
+db["no2_viz"].unique().shape
+```
+
+```{python}
+sns.displot(
+    db, x="no2_viz", kde=True, aspect=2
+)
+
+plt.show()
+```
+
+### How to assign colors?
+
+::: callout-important
+To build an intuition behind each classification algorithm more easily, we create a helper method (`plot_classi`) that generates a visualisation of a given classification.
+:::
+
+```{python}
+
+def plot_classi(classi, col, db):
+    """
+    Illustrate a classiffication
+    ...
+    
+    Arguments
+    ---------
+    classi : mapclassify.classifiers
+             Classification object
+    col    : str
+             Column name used for `classi`
+    db     : geopandas.GeoDataFrame
+             Geo-table with data for
+             the classification    
+    """
+    f, ax = plt.subplots(figsize=(12, 6))
+    ax.set_title(classi.name)
+    # KDE
+    sns.kdeplot(
+        db[col], fill=True, ax=ax
+    )
+    for i in range(0, len(classi.bins)-1):
+        ax.axvline(classi.bins[i], color="red")
+    # Map
+    aux = f.add_axes([.6, .45, .32, .4])
+    db.assign(lbls=classi.yb).plot(
+        "lbls", cmap="viridis", ax=aux
+    )
+    aux.set_axis_off()
+    plt.show()
+    return None
+```
+
+-   Equal intervals
+
+```{python}
+classi = mc.EqualInterval(db["no2_viz"], k=7)
+classi
+```
+
+```{python}
+plot_classi(classi, "no2_viz", db)
+```
+
+-   Quantiles
+
+```{python}
+classi = mc.Quantiles(db["no2_viz"], k=7)
+classi
+```
+
+```{python}
+plot_classi(classi, "no2_viz", db)
+```
+
+-   Fisher-Jenks
+
+```{python}
+classi = mc.FisherJenks(db["no2_viz"], k=7)
+classi
+```
+
+```{python}
+plot_classi(classi, "no2_viz", db)
+```
+
+------------------------------------------------------------------------
+
+Now let's dig into the internals of `classi`:
+
+```{python}
+classi
+```
+
+```{python}
+classi.k
+```
+
+```{python}
+classi.bins
+```
+
+```{python}
+classi.yb
+```
+
+### How *many* colors?
+
+The code used to generate the next figure uses more advanced features than planned for this course.
+
+If you want to inspect it, look at the code cell below.
+
+```{python}
+vals = [3, 5, 7, 9, 12, 15]
+algos = ["equal_interval", "quantiles", "fisherjenks"]
+f, axs = plt.subplots(
+    len(algos), len(vals), figsize=(3*len(vals), 3*len(algos))
+)
+for i in range(len(algos)):
+    for j in range(len(vals)):
+        db.plot(
+            "no2_viz", scheme=algos[i], k=vals[j], ax=axs[i, j]
+        )
+        axs[i, j].set_axis_off()
+        if i==0:
+            axs[i, j].set_title(f"k={vals[j]}")
+        if j==0:
+            axs[i, j].text(
+                -0.1, 
+                0.5, 
+                algos[i], 
+                horizontalalignment='center',
+                verticalalignment='center', 
+                transform=axs[i, j].transAxes,
+                rotation=90
+            )
+
+plt.show()
+```
+
+### Using the *right* color
+
+For a "safe" choice, make sure to visit [ColorBrewer](https://colorbrewer2.org/)
+
+-   [<img src="./img/l04_pal_qual.png" alt="Qualitative" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/wesanderson/#fantasticfox2_5) **Categories**, non-ordered
+-   [<img src="./img/l04_pal_seq.png" alt="Sequential" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/colorbrewer/sequential/#rdpu_5) Graduated, **sequential**
+-   [<img src="./img/l04_pal_div.png" alt="Divergent" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/colorbrewer/diverging/#rdylgn_5) Graduated, **divergent**
+
+### Choropleths on Geo-Tables
+
+#### Streamlined
+
+How can we create classifications from data on geo-tables? Two ways:
+
+-   Directly within `plot` (only for some algorithms)
+
+```{python}
+fig, ax = plt.subplots()
+db.plot(
+    "no2_viz", scheme="quantiles", k=7, legend=True, ax=ax
+)
+plt.show()
+```
+
+See [this tutorial](https://pysal.org/mapclassify/notebooks/03_choropleth.html) for more details on fine tuning choropleths manually.
+
+::: callout-note
+**Challenge:** Create an equal interval map with five bins for `no2_viz` .
+:::
+
+#### Manual approach
+
+This is valid for any algorithm and provides much more flexibility at the cost of effort.
+
+```{python}
+classi = mc.Quantiles(db["no2_viz"], k=7)
+
+fig, ax = plt.subplots()
+db.assign(
+    classes=classi.yb
+).plot("classes", ax=ax)
+
+plt.show()
+```
+
+#### Value by alpha mapping
+
+```{python}
+db['area_inv'] = 1 / db.to_crs(epsg=5726).area
+```
+
+```{python}
+fig, ax = plt.subplots()
+db.plot('area_inv', scheme='quantiles', ax=ax)
+ax.set_title('area_inv')
+ax.set_axis_off()
+
+plt.show()
+```
+
+```{python}
+# Set up figure and axis
+fig, ax = plt.subplots(1, figsize=(12, 9))
+# VBA choropleth
+vba_choropleth(
+    'no2_viz',          # Column for color 
+    'area_inv',         # Column for transparency (alpha)
+    db,                 # Geo-table
+    rgb_mapclassify={   # Options for color classification
+        'classifier': 'quantiles', 'k':5
+    },
+    alpha_mapclassify={ # Options for alpha classification
+        'classifier': 'quantiles', 'k':5
+    },
+    legend=True,        # Add legend
+    ax=ax               # Axis
+)
+# Add boundary lines
+db.plot(color='none', linewidth=0.05, ax=ax)
+
+plt.show()
+```
+
+See [here](https://github.com/pysal/splot/blob/main/notebooks/mapping_vba.ipynb) for more examples of value-by-alpha (VBA) mapping.
+
+#### Legendgrams
+
+Legendgrams are a way to more closely connect the statistical characteristics of your data to the map display.
+
+::: callout-warning
+Legendgram are in an *experimental* development stage, so the code is a bit more involved and less stable. Use at your own risk!
+:::
+
+Here is an example:
+
+```{python}
+fig, ax = plt.subplots(figsize=(9, 9))
+
+classi = mc.Quantiles(db["no2_viz"], k=7)
+
+db.assign(
+    classes=classi.yb
+).plot("classes", ax=ax)
+
+legendgram(
+    fig,                   # Figure object
+    ax,                  # Axis object of the map
+    db["no2_viz"],       # Values for the histogram
+    classi.bins,         # Bin boundaries
+    pal=palmpl.Viridis_7,# color palette (as palettable object)
+    legend_size=(.5,.2), # legend size in fractions of the axis
+    loc = 'lower right', # matplotlib-style legend locations
+)
+ax.set_axis_off()
+
+plt.show()
+```
+
+::: callout-note
+**Challenge:** Give [Task I and II](https://pietrostefani.github.io/gds/mapvectorDIY.html) from the GDS course a go.
+:::
+
+### Choropleths on surfaces
+
+Assuming you have the file locally on the path `../data/`:
+
+```{python}
+grid = xarray.open_rasterio(
+    "../data/cambodia_s5_no2.tif"
+).sel(band=1)
+```
+
+```{python}
+grid = rioxarray.open_rasterio("../data/cambodia_s5_no2.tif").sel(band=1)
+```
+
+-   Implicit continuous equal interval
+
+```{python}
+fig, ax = plt.subplots()
+
+grid.where(
+    grid != grid.rio.nodata
+).plot(cmap="viridis", ax=ax)
+
+plt.show()
+```
+
+```{python}
+fig, ax = plt.subplots()
+
+grid.where(
+    grid != grid.rio.nodata
+).plot(cmap="viridis", robust=True, ax=ax)
+
+plt.show()
+```
+
+-   Discrete equal interval
+
+```{python}
+fig, ax = plt.subplots()
+
+grid.where(
+    grid != grid.rio.nodata
+).plot(cmap="viridis", levels=7, ax=ax)
+
+plt.show()
+```
+
+-   Combining with `mapclassify`
+
+```{python}
+grid_nona = grid.where(
+    grid != grid.rio.nodata
+)
+
+classi = mc.Quantiles(
+    grid_nona.to_series().dropna(), k=7
+)
+
+fig, ax = plt.subplots()
+
+grid_nona.plot(
+    cmap="viridis", levels=classi.bins, ax=ax
+)
+plt.title(classi.name)
+
+plt.show()
+```
+
+```{python}
+grid_nona = grid.where(
+    grid != grid.rio.nodata
+)
+
+classi = mc.FisherJenksSampled(
+    grid_nona.to_series().dropna().values, k=7
+)
+
+fig, ax = plt.subplots()
+
+grid_nona.plot(
+    cmap="viridis", levels=classi.bins, ax=ax
+)
+plt.title(classi.name)
+
+plt.show()
+```
+
+```{python}
+fig, ax = plt.subplots()
+
+grid_nona = grid.where(
+    grid != grid.rio.nodata
+)
+
+classi = mc.StdMean(
+    grid_nona.to_series().dropna().values
+)
+
+grid_nona.plot(
+    cmap="coolwarm", levels=classi.bins, ax=ax
+)
+plt.title(classi.name)
+
+plt.show()
+```
+
+```{python}
+grid_nona = grid.where(
+    grid != grid.rio.nodata
+)
+
+classi = mc.BoxPlot(
+    grid_nona.to_series().dropna().values
+)
+
+fig, ax = plt.subplots()
+
+grid_nona.plot(
+    cmap="coolwarm", levels=classi.bins, ax=ax
+)
+plt.title(classi.name)
+
+plt.show()
+```
+
+::: callout-note
+**Challenge:** Read the satellite image for Madrid used in the @sec-spatial-data and create three choropleths, one for each band, using the colormaps`Reds`, `Greens`, `Blues`.
+
+Play with different classification algorithms.
+
+-   *Do the results change notably?*
+-   *If so, why do you think that is?*
+:::
+
+## Next steps
+
+If you are interested in statistical maps based on classification, here are two recommendations to check out next:
+
+-   On the technical side, the [documentation for `mapclassify`](https://pysal.org/mapclassify/) (including its [tutorials](https://pysal.org/mapclassify/tutorial.html)) provides more detail and illustrates more classification algorithms than those reviewed in this block.
+-   On a more conceptual note, Cynthia Brewer's "Designing better maps" [@brewer2015designing] is an excellent blueprint for good map making.

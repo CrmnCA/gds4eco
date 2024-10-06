@@ -1,0 +1,386 @@
+---
+format:
+  html:
+    code-fold: false
+jupyter: python3
+---
+
+# Spatial data {#sec-spatial-data}
+
+This block is all about understanding spatial data, both conceptually and practically. Before your fingers get on the keyboard, the following readings will help you get going and familiar with core ideas:
+
+-   [Chapter 1](https://geographicdata.science/book/notebooks/01_geo_thinking.html) of the GDS Book [@reyABwolf], which provides a conceptual overview of representing Geography in data.
+
+-   [Chapter 3](https://geographicdata.science/book/notebooks/03_spatial_data.html) of the GDS Book [@reyABwolf], a sister chapter with a more applied perspective on how concepts are implemented in computer data structures.
+
+Additionally, parts of this block are based and sourced from Chapters 2, 3 and 4 from the on-line course "A course in Geographic Data Science", by Dr Elisabetta Pietrostefani and Dr Carmen Cabrera-Arnau [@courseGDS-pietrostefani-cabrera]. This course also provides code in R.
+
+## Packages and modules
+
+```{python}
+import pandas
+import geopandas
+import xarray, rioxarray
+import contextily
+import matplotlib.pyplot as plt
+```
+
+## Data
+
+If you want to read more about the data sources behind this dataset, head to the [Datasets](./data/datasets) section.
+
+### Points
+
+Assuming you have the file locally on the path `../data/`:
+
+```{python}
+pts = geopandas.read_file("../data/madrid_abb.gpkg")
+```
+
+::: callout-note
+Sometimes, points are provided as separate columns in an otherwise non-spatial table. For example imagine we have an object `cols` with a column named `X` for longitude and `Y` for latitude. Then, we can convert those into proper geometries by running `pts = geopandas.GeoSeries( geopandas.points_from_xy(cols["X"], cols["Y"])`.
+:::
+
+Let's explore the points dataset that we loaded above.
+
+```{python}
+pts.info()
+```
+
+```{python}
+pts.head()
+```
+
+### Lines
+
+Assuming you have the file locally on the path `../data/`:
+
+```{python}
+lines = geopandas.read_file("../data/arturo_streets.gpkg")
+```
+
+```{python}
+lines.info()
+```
+
+```{python}
+lines.loc[0, "geometry"]
+```
+
+::: callout-note
+**Challenge:** Print descriptive statistics for `population_density` and `average_quality`.
+:::
+
+### Polygons
+
+Assuming you have the file locally on the path `../data/`:
+
+```{python}
+polys = geopandas.read_file("../data/neighbourhoods.geojson")
+```
+
+```{python}
+polys.head()
+```
+
+```{python}
+polys.query("neighbourhood_group == 'Retiro'")
+```
+
+```{python}
+polys.neighbourhood_group.unique()
+```
+
+## Surfaces
+
+Assuming you have the file locally on the path `../data/`:
+
+```{python}
+sat = rioxarray.open_rasterio("../data/madrid_scene_s2_10_tc.tif")
+```
+
+```{python}
+sat
+```
+
+```{python}
+sat.sel(band=1)
+```
+
+```{python}
+sat.sel(
+    x=slice(430000, 440000),  # x is ascending
+    y=slice(4480000, 4470000) # y is descending
+)
+```
+
+::: callout-note
+**Challenge:** Subset `sat` to band 2 and the section within \[444444, 455555\] of Easting and \[4470000, 4480000\] of Northing.
+
+-   *How many pixels does it contain?*
+
+-   *What if you used bands 1 and 3 instead?*
+:::
+
+## Visualisation
+
+You will need version 0.10.0 or greater of `geopandas` to use `explore`.
+
+```{python}
+polys.explore()
+```
+
+```{python}
+fig, ax = plt.subplots()
+polys.plot(ax=ax)
+plt.show()
+```
+
+```{python}
+fig, ax = plt.subplots()
+lines.plot(linewidth=0.1, color="black", ax=ax)
+#contextily.add_basemap(ax, crs=lines.crs)
+plt.show()
+```
+
+See more basemap options [here](https://contextily.readthedocs.io/en/latest/providers_deepdive.html).
+
+```{python}
+fig, ax = plt.subplots()
+pts.plot(color="red", figsize=(12, 12), markersize=0.1, ax=ax)
+contextily.add_basemap(
+    ax,
+    crs = pts.crs,
+    source = contextily.providers.CartoDB.DarkMatter
+)
+plt.show()
+```
+
+```{python}
+sat.plot.imshow(figsize=(12, 12))
+plt.show()
+```
+
+```{python}
+fig, ax = plt.subplots(figsize=(10, 10))
+sat.plot.imshow(ax=ax)
+contextily.add_basemap(
+    ax,
+    crs=sat.rio.crs,
+    source=contextily.providers.CartoDB.VoyagerOnlyLabels,
+    zoom=11,
+)
+plt.show()
+```
+
+::: callout-note
+**Challenge:** Make three plots of `sat`, plotting one single band in each.
+:::
+
+## Spatial operations
+
+### (Re-)Projections
+
+```{python}
+pts.crs
+```
+
+```{python}
+sat.rio.crs
+```
+
+```{python}
+pts.to_crs(sat.rio.crs).crs
+```
+
+```{python}
+sat.rio.reproject(pts.crs).rio.crs
+```
+
+```{python}
+# All into Web Mercator (EPSG:3857)
+fig, ax = plt.subplots(1, figsize=(12, 12))
+
+## Satellite image
+sat.rio.reproject(
+    "EPSG:3857"
+).plot.imshow(
+    ax=ax
+)
+
+## Neighbourhoods
+polys.to_crs(epsg=3857).plot(
+    linewidth=1, 
+    edgecolor="xkcd:lime", 
+    facecolor="none",
+    ax=ax
+)
+
+## Labels
+contextily.add_basemap( # No need to reproject
+    ax,
+    source=contextily.providers.CartoDB.VoyagerOnlyLabels,
+)
+
+plt.show()
+```
+
+### Centroids
+
+Note the warning that geometric operations with non-projected CRS object result in biases.
+
+```{python}
+polys.centroid
+```
+
+It is therefore important to re-project these geometries to a projected crs such as we did with with `pts` before.
+
+```{python}
+polys = polys.to_crs(sat.rio.crs)
+```
+
+Now, we can compute centroids without warnings:
+
+```{python}
+polys.centroid
+```
+
+```{python}
+fig, ax = plt.subplots()
+polys.plot(color="purple", ax=ax)
+polys.centroid.plot(
+    ax=ax, color="lime", markersize=1
+)
+
+plt.show()
+```
+
+### Spatial joins
+
+More information about spatial joins in `geopandas` is available on its [documentation page](https://geopandas.org/mergingdata.html#spatial-joins).
+
+Let's ensure that the geometries we are looking to join are in the same projection.
+
+```{python}
+lines = lines.to_crs(polys.crs)
+```
+
+```{python}
+sj = geopandas.sjoin(
+    lines,
+    polys
+)
+```
+
+```{python}
+sj.info()
+```
+
+```{python}
+
+fig, ax = plt.subplots()
+
+# Subset of lines
+sj.query(
+    "neighbourhood == 'Jerónimos'"
+).plot(color="xkcd:bright turquoise", ax=ax)
+
+# Subset of line centroids
+sj.query(
+    "neighbourhood == 'Jerónimos'"
+).centroid.plot(
+    color="xkcd:bright violet", markersize=7, ax=ax
+)
+
+# Local basemap
+contextily.add_basemap(
+    ax,
+    crs=sj.crs,
+    source="../data/madrid_scene_s2_10_tc.tif",
+    alpha=0.5
+)
+
+plt.show()
+```
+
+```{python}
+sj.info()
+```
+
+### Areas
+
+To compute areas of polygons, use a projected crs (we already transformed `polys` to the same projection as `sat`, which is a projected crs).
+
+```{python}
+areas = polys.area * 1e-6 # Km2
+areas.head()
+```
+
+### Distances
+
+We can give `geopandas.tools.geocode()` a string or a set of strings corresponding to addresses. It will geocode it and return a `GeoDataFrame` of the resulting point geometries
+
+```{python}
+cemfi = geopandas.tools.geocode(
+    "Calle Casado del Alisal, 5, Madrid"
+).to_crs(sat.rio.crs)
+
+```
+
+```{python}
+cemfi
+```
+
+We can compute the distance between the point for `cemfi` and the centroids of all the polygons in `polys` ensuring they both are in the same crs:
+
+```{python}
+polys.to_crs(
+    cemfi.crs
+).distance(
+    cemfi.geometry
+)
+```
+
+```{python}
+d2cemfi = polys.to_crs(
+    cemfi.crs
+).distance(
+    cemfi.geometry[0] # NO index
+)
+d2cemfi.head()
+```
+
+Make a map, colouring the polygons according the the distance of their centroid to `cemfi`:
+
+```{python}
+fig, ax = plt.subplots()
+
+polys.assign(
+    dist=d2cemfi/1000
+).plot("dist", legend=True, ax=ax)
+
+cemfi.to_crs(
+    polys.crs
+).plot(
+    marker="*", 
+    markersize=15, 
+    color="r", 
+    label="CEMFI", 
+    ax=ax
+)
+
+ax.legend()
+ax.set_title(
+    "Distance to CEMFI"
+)
+
+plt.show()
+```
+
+## Next steps
+
+If you are interested in following up on some of the topics explored in this block, the following pointers might be useful:
+
+-   Although we have seen here `geopandas` only, all non-geographic operations on geo-tables are really thanks to `pandas`, the workhorse for tabular data in Python. Their [official documentation](https://pandas.pydata.org/docs/) is an excellent first stop. If you prefer a book, [@McKinney2013Python] is a great one.
+-   For more detail on geographic operations on geo-tables, the [Geopandas official documentation](https://geopandas.org/) is a great place to continue the journey.
+-   Surfaces, as covered here, are really an example of multi-dimensional labelled arrays. The library we use, `xarray` represents the cutting edge for working with these data structures in Python, and [their documentation](https://xarray.pydata.org/) is a great place to wrap your head around how data of this type can be manipulated. For geographic extensions (CRS handling, reprojections, etc.), we have used `rioxarray` under the hood, and [its documentation](https://corteva.github.io/rioxarray/) is also well worth checking.
