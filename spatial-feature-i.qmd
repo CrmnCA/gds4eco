@@ -13,7 +13,7 @@ Feature Engineering is a common term in machine learning that refers to the proc
 
 There is only one reading to complete for this block: this [Chapter](https://geographicdata.science/book/notebooks/12_feature_engineering.html) of the GDS Book [@reyABwolf].
 
-## Modules
+## Packages and modules
 
 ```{python}
 import pandas

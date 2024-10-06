@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./datasets.html" rel="next">
+<link href="./openstreetmap.html" rel="next">
 <link href="./spatial-feature-i.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -228,6 +228,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Spatial feature engineering (II)</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./openstreetmap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OpenStreetMap</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -263,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#modules" id="toc-modules" class="nav-link active" data-scroll-target="#modules"><span class="header-section-number">4.1</span> Modules</a></li>
+  <li><a href="#packages-and-modules" id="toc-packages-and-modules" class="nav-link active" data-scroll-target="#packages-and-modules"><span class="header-section-number">4.1</span> Packages and modules</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">4.2</span> Data</a></li>
   <li><a href="#distance-buffers" id="toc-distance-buffers" class="nav-link" data-scroll-target="#distance-buffers"><span class="header-section-number">4.3</span> Distance buffers</a></li>
   <li><a href="#distance-rings" id="toc-distance-rings" class="nav-link" data-scroll-target="#distance-rings"><span class="header-section-number">4.4</span> Distance rings</a></li>
@@ -296,9 +302,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>In this second part of Spatial Feature Engineering, we turn to Map Synthesis. There is only one <a href="https://geographicdata.science/book/notebooks/12_feature_engineering.html">reading</a> to complete for this block, from the GDS Book</p>
-<section id="modules" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="modules"><span class="header-section-number">4.1</span> Modules</h2>
-<div id="06663aa5" class="cell" data-execution_count="1">
+<section id="packages-and-modules" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="packages-and-modules"><span class="header-section-number">4.1</span> Packages and modules</h2>
+<div id="35dcc973" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas, geopandas</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextily</span>
@@ -310,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4.2" class="anchored" data-anchor-id="data"><span class="header-section-number">4.2</span> Data</h2>
 <p>If you want to read more about the data sources behind this dataset, head to the <a href="./data/datasets">Datasets</a> section.</p>
 <p>Assuming you have the file locally on the path <code>./data/</code>:</p>
-<div id="ea01b296" class="cell" data-execution_count="2">
+<div id="a47e470d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pts <span class="op">=</span> geopandas.read_file(<span class="st">"./data/madrid_abb.gpkg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will be working with a modified version of <code>pts</code>:</p>
@@ -318,15 +324,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Since we will require distance calculations, we will switch to the Spanish official projection</li>
 <li>To make calculations in the illustration near-instantaneous, we will work with a smaller (random) sample of Airbnb properties (10% of the total)</li>
 </ul>
-<div id="234c809c" class="cell" data-execution_count="3">
+<div id="a67a7e72" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> pts.sample(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    frac<span class="op">=</span><span class="fl">0.1</span>, random_state<span class="op">=</span><span class="dv">123</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>).to_crs(epsg<span class="op">=</span><span class="dv">25830</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As you can see in the description, the new CRS is expressed in metres:</p>
-<div id="35178bd9" class="cell" data-execution_count="4">
+<div id="48f0f1d3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>db.crs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>&lt;Projected CRS: EPSG:25830&gt;
 Name: ETRS89 / UTM zone 30N
 Axis Info [cartesian]:
@@ -347,11 +353,11 @@ Datum: European Terrestrial Reference System 1989 ensemble
 <section id="distance-buffers" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="distance-buffers"><span class="header-section-number">4.3</span> Distance buffers</h2>
 <p><em>How many Airbnb’s are within 500m of each Airbnb?</em></p>
-<div id="cc6d2cd9" class="cell" data-execution_count="5">
+<div id="0e812b35" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pysal.lib <span class="im">import</span> weights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using <code>DistanceBand</code>, we can build a spatial weights matrix that assigns <code>1</code> to each observation within 500m, and <code>0</code> otherwise.</p>
-<div id="75c7687c" class="cell" data-execution_count="6">
+<div id="ba6b5973" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>w500m <span class="op">=</span> weights.DistanceBand.from_dataframe(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    db, threshold<span class="op">=</span><span class="dv">500</span>, binary<span class="op">=</span><span class="va">True</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -365,10 +371,10 @@ The weights matrix is not fully connected:
 </div>
 </div>
 <p>The number of neighbors can be accessed through the <code>cardinalities</code> attribute:</p>
-<div id="68ed3be9" class="cell" data-execution_count="7">
+<div id="d9b69b2b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n_neis <span class="op">=</span> pandas.Series(w500m.cardinalities)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>n_neis.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>11297    213
 2659       5
 16242     21
@@ -377,7 +383,7 @@ The weights matrix is not fully connected:
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="560a300a" class="cell" data-execution_count="8">
+<div id="8ffba763" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>db.assign(</span>
@@ -410,7 +416,7 @@ Note
 <section id="distance-rings" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="distance-rings"><span class="header-section-number">4.4</span> Distance rings</h2>
 <p><em>How many Airbnb’s are between 500m and 1km of each Airbnb?</em></p>
-<div id="617d3dd3" class="cell" data-execution_count="9">
+<div id="de8796d5" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>w1km <span class="op">=</span> weights.DistanceBand.from_dataframe(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    db, threshold<span class="op">=</span><span class="dv">1000</span>, binary<span class="op">=</span><span class="va">True</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -424,11 +430,11 @@ The weights matrix is not fully connected:
 </div>
 </div>
 <p>Now, we could do simply a subtraction:</p>
-<div id="dbc81f97" class="cell" data-execution_count="10">
+<div id="dfa7685f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>n_ring_neis <span class="op">=</span> pandas.Series(w1km.cardinalities) <span class="op">-</span> n_neis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Or, if we need to know <em>which is which</em>, we can use set operations on weights:</p>
-<div id="2d2253d8" class="cell" data-execution_count="11">
+<div id="b8635a9e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>w_ring <span class="op">=</span> weights.w_difference(w1km, w500m, constrained<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/libpysal/weights/weights.py:224: UserWarning:
@@ -440,9 +446,9 @@ The weights matrix is not fully connected:
 </div>
 </div>
 <p>And we can confirm they’re both the same:</p>
-<div id="11b6b653" class="cell" data-execution_count="12">
+<div id="d499d67a" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(pandas.Series(w_ring.cardinalities) <span class="op">-</span> n_ring_neis).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>0</code></pre>
 </div>
 </div>
@@ -468,7 +474,7 @@ Note
 <h2 data-number="4.5" class="anchored" data-anchor-id="cluster-membership-points"><span class="header-section-number">4.5</span> Cluster membership (points)</h2>
 <p>We can use the spatial configuration of observations to classify them as part of clusters or not, which can then be encoded, for example, as dummy variables in a model.</p>
 <p>These <em>magic</em> numbers need to be pre-set and you can play with both <code>min_pct</code> (or <code>min_pts</code> directly) and <code>eps</code> to see how they affect the results (spoiler: a lot!).</p>
-<div id="4c15d0aa" class="cell" data-execution_count="13">
+<div id="8ac77362" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>min_pct <span class="op">=</span> <span class="dv">2</span></span>
@@ -476,7 +482,7 @@ Note
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>eps <span class="op">=</span> <span class="dv">500</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will illustrate it with a minimum number of points of <code>min_pct</code> % of the sample and a maximum radious of <code>eps</code> metres.</p>
-<div id="6f95c2ff" class="cell" data-execution_count="14">
+<div id="f58497da" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DBSCAN(min_samples<span class="op">=</span>min_pts, eps<span class="op">=</span>eps)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>model.fit(</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    db.assign(</span>
@@ -487,12 +493,12 @@ Note
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will attach the labels to <code>db</code> for easy access:</p>
-<div id="eb08bb84" class="cell" data-execution_count="15">
+<div id="0b785320" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>db[<span class="st">"labels"</span>] <span class="op">=</span> model.labels_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can define boundaries to turn point clusters into polygons if that fits our needs better:</p>
 <p>The code in the next cell is a bit more advanced than expected for this course, but is used here as an illustration.</p>
-<div id="fc010039" class="cell" data-execution_count="16">
+<div id="573ed80b" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pysal.lib <span class="im">import</span> cg</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>boundaries <span class="op">=</span> []</span>
@@ -510,7 +516,7 @@ Note
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And we can see what the clusters look like:</p>
-<div id="15829c55" class="cell" data-execution_count="17">
+<div id="43fdaa9c" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>db.to_crs(</span>
@@ -563,7 +569,7 @@ Note
 <h2 data-number="4.6" class="anchored" data-anchor-id="cluster-membership-polygons"><span class="header-section-number">4.6</span> Cluster membership (polygons)</h2>
 <p>We can take a similar approach as above if we have polygon geographies instead of points. Rather than using DBSCAN, here we can rely on local indicators of spatial association (LISAs) to pick up spatial concentrations of high or low values.</p>
 <p>For the illustration, we will aggregate the location of Airbnb properties to a regular hexagonal grid, similar to how we generated it when transferring from polygons to polygons. First we create a polygon covering the extent of points:</p>
-<div id="37abe4b0" class="cell" data-execution_count="18">
+<div id="9c1dd5c6" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>one <span class="op">=</span> geopandas.GeoSeries(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    [cg.alpha_shape_auto(</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        np.array(</span>
@@ -574,7 +580,7 @@ Note
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then we can tessellate:</p>
-<div id="9d43b246" class="cell" data-execution_count="19">
+<div id="038e9cdf" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>abb_hex <span class="op">=</span> tobler.util.h3fy(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    one, resolution<span class="op">=</span><span class="dv">8</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -586,7 +592,7 @@ You will likely lose important projection information when converting to a PROJ 
 </div>
 </div>
 <p>And obtain a count of points in each polygon:</p>
-<div id="4db935b6" class="cell" data-execution_count="20">
+<div id="02fbeafe" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> geopandas.sjoin(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    db, abb_hex</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>).groupby(</span>
@@ -617,28 +623,38 @@ You will likely lose important projection information when converting to a PROJ 
 </div>
 </div>
 <p>To identify spatial clusters, we rely on <code>esda</code>:</p>
-<div id="b6620565" class="cell" data-execution_count="21">
+<div id="d7af3045" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pysal.explore <span class="im">import</span> esda</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/spaghetti/network.py:40: FutureWarning:
+
+The next major release of pysal/spaghetti (2.0.0) will drop support for all ``libpysal.cg`` geometries. This change is a first step in refactoring ``spaghetti`` that is expected to result in dramatically reduced runtimes for network instantiation and operations. Users currently requiring network and point pattern input as ``libpysal.cg`` geometries should prepare for this simply by converting to ``shapely`` geometries.
+
+/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/tqdm/auto.py:22: TqdmWarning:
+
+IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+</code></pre>
+</div>
 </div>
 <p>And compute the LISA statistics:</p>
-<div id="a36c9fe4" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> weights.Queen.from_dataframe(abb_hex)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>lisa <span class="op">=</span> esda.Moran_Local(abb_hex[<span class="st">"count"</span>], w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3109405c" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> weights.Queen.from_dataframe(abb_hex)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>lisa <span class="op">=</span> esda.Moran_Local(abb_hex[<span class="st">"count"</span>], w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/79/65l52xsj7vq_4_t_l6k5bl2c0000gn/T/ipykernel_27576/2473509840.py:1: FutureWarning:
+<pre><code>/var/folders/79/65l52xsj7vq_4_t_l6k5bl2c0000gn/T/ipykernel_31016/2473509840.py:1: FutureWarning:
 
 `use_index` defaults to False but will default to True in future. Set True/False directly to control this behavior and silence this warning
 </code></pre>
 </div>
 </div>
 <p>For a visual inspection of the clusters, <code>splot</code>:</p>
-<div id="2500ef83" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pysal.viz <span class="im">import</span> splot</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> splot.esda <span class="im">import</span> lisa_cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a6467741" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pysal.viz <span class="im">import</span> splot</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> splot.esda <span class="im">import</span> lisa_cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c780fa4c" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>lisa_cluster(lisa, abb_hex, p<span class="op">=</span><span class="fl">0.01</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6268ae39" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lisa_cluster(lisa, abb_hex, p<span class="op">=</span><span class="fl">0.01</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -648,24 +664,24 @@ You will likely lose important projection information when converting to a PROJ 
 </div>
 </div>
 <p>And, if we want to extract the labels for each polygon, we can do so from the <code>lisa</code> object:</p>
-<div id="182c1adf" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lisa.q <span class="op">*</span> (lisa.p_sim <span class="op">&lt;</span> <span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="50">
-<pre><code>array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0,
-       3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0,
-       1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0,
-       0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0,
-       0, 0, 3, 0, 3, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 3, 3, 0, 0, 3, 0, 0, 0, 3, 0,
-       0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0,
-       3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       1, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 3, 0, 0,
-       3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0])</code></pre>
+<div id="653fdb90" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>lisa.q <span class="op">*</span> (lisa.p_sim <span class="op">&lt;</span> <span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>array([0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 3, 0, 1, 0, 0, 0, 0, 0, 3,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 3, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0,
+       3, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0,
+       0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0,
+       0, 3, 0, 0, 0, 1, 3, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3,
+       0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+       0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0,
+       0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0,
+       3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 3, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0])</code></pre>
 </div>
 </div>
 </section>
@@ -1109,8 +1125,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./datasets.html" class="pagination-link" aria-label="Data sets">
-        <span class="nav-page-text">Data sets</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./openstreetmap.html" class="pagination-link" aria-label="OpenStreetMap">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OpenStreetMap</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

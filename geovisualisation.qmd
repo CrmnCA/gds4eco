@@ -14,7 +14,7 @@ This block is all about visualising statistical data on top of a geography. Alth
 
 Additionally, parts of this block are based and sourced from Chapters 2, 3 and 4 from the on-line course "A course in Geographic Data Science", by Dr Elisabetta Pietrostefani and Dr Carmen Cabrera-Arnau [@courseGDS-pietrostefani-cabrera]. This course also provides code in R.
 
-## Modules
+## Packages and modules
 
 ```{python}
 import geopandas

@@ -19,7 +19,7 @@ book:
         - geovisualisation.qmd
         - spatial-feature-i.qmd
         - spatial-feature-ii.qmd
-        # - openstreetmap.qmd
+        - openstreetmap.qmd
         # - transport-costs.qmd
         # - web-mapping.qmd
     - part: "Epilogue"

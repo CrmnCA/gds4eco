@@ -9,7 +9,7 @@ jupyter: python3
 
 In this second part of Spatial Feature Engineering, we turn to Map Synthesis. There is only one [reading](https://geographicdata.science/book/notebooks/12_feature_engineering.html) to complete for this block, from the GDS Book
 
-## Modules
+## Packages and modules
 
 ```{python}
 import pandas, geopandas

@@ -277,7 +277,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./spatial-feature-ii.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Spatial feature engineering (II)</span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Spatial feature engineering (II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./openstreetmap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OpenStreetMap</span></span></a>
   </div>
 </li>
       </ul>
@@ -315,7 +321,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#modules" id="toc-modules" class="nav-link active" data-scroll-target="#modules"><span class="header-section-number">3.1</span> Modules</a></li>
+  <li><a href="#packages-and-modules" id="toc-packages-and-modules" class="nav-link active" data-scroll-target="#packages-and-modules"><span class="header-section-number">3.1</span> Packages and modules</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">3.2</span> Data</a></li>
   <li><a href="#polygons-to-points" id="toc-polygons-to-points" class="nav-link" data-scroll-target="#polygons-to-points"><span class="header-section-number">3.3</span> Polygons to points</a></li>
   <li><a href="#points-to-polygons" id="toc-points-to-polygons" class="nav-link" data-scroll-target="#points-to-polygons"><span class="header-section-number">3.4</span> Points to polygons</a></li>
@@ -354,9 +360,9 @@ window.Quarto = {
 <p>Feature Engineering is a common term in machine learning that refers to the processes and transformations involved in turning data from the state in which the modeler access them into what is then fed to a model. This can take several forms, from standardisation of the input data, to the derivation of numeric scores that better describe aspects (<em>features</em>) of the data we are using.</p>
 <p><em>Spatial</em> Feature Engineering refers to operations we can use to derive “views” or summaries of our data that we can use in models, using space as the key medium to create them.</p>
 <p>There is only one reading to complete for this block: this <a href="https://geographicdata.science/book/notebooks/12_feature_engineering.html">Chapter</a> of the GDS Book <span class="citation" data-cites="reyABwolf">(<a href="references.html#ref-reyABwolf" role="doc-biblioref">Rey, Arribas-Bel, and Wolf forthcoming</a>)</span>.</p>
-<section id="modules" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="modules"><span class="header-section-number">3.1</span> Modules</h2>
-<div id="be9b7ecd" class="cell" data-execution_count="1">
+<section id="packages-and-modules" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="packages-and-modules"><span class="header-section-number">3.1</span> Packages and modules</h2>
+<div id="1ecfe25d" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray, rioxarray</span>
@@ -369,7 +375,7 @@ window.Quarto = {
 <h2 data-number="3.2" class="anchored" data-anchor-id="data"><span class="header-section-number">3.2</span> Data</h2>
 <p>If you want to read more about the data sources behind this dataset, head to the <a href="./data/datasets">Datasets</a> section.</p>
 <p>Assuming you have the file locally on the path <code>./data/</code>:</p>
-<div id="02a93ec7" class="cell" data-execution_count="2">
+<div id="9da2931a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>regions <span class="op">=</span> geopandas.read_file(<span class="st">"./data/cambodia_regional.gpkg"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> geopandas.read_file(<span class="st">"./data/cambodian_cities.geojson"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pollution <span class="op">=</span> rioxarray.open_rasterio(</span>
@@ -380,7 +386,7 @@ window.Quarto = {
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>).sel(band<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Check both geo-tables and the surface are in the same CRS:</p>
-<div id="65780e1b" class="cell" data-execution_count="3">
+<div id="70e24ccb" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    regions.crs.to_epsg() <span class="op">==</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    cities.crs.to_epsg() <span class="op">==</span></span>
@@ -394,10 +400,10 @@ window.Quarto = {
 <section id="polygons-to-points" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="polygons-to-points"><span class="header-section-number">3.3</span> Polygons to points</h2>
 <p>In which region is a city?</p>
-<div id="b25848ab" class="cell" data-execution_count="4">
+<div id="9016e313" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sj <span class="op">=</span> geopandas.sjoin(cities, regions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9ca7284c" class="cell" data-execution_count="5">
+<div id="a9e880b5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#   City name | Region name</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sj[[<span class="st">"UC_NM_MN"</span>, <span class="st">"adm2_name"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -496,7 +502,7 @@ Note
 <li>We <code>assign</code> to create a new column</li>
 </ol>
 <p>If you want no missing values, you can <code>fillna(0)</code> since you know missing data are zeros.</p>
-<div id="0fb81919" class="cell" data-execution_count="6">
+<div id="1848ea2d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>regions.set_index(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"adm2_name"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>).assign(</span>
@@ -536,7 +542,7 @@ Note
 <h2 data-number="3.5" class="anchored" data-anchor-id="surface-to-points"><span class="header-section-number">3.5</span> Surface to points</h2>
 <p>Consider attaching to each city in <code>cities</code> the pollution level, as expressed in <code>pollution</code>.</p>
 <p>The code for generating the next figure is a bit more advanced as it fiddles with text, but if you want to explore it you can look at the code cell below.</p>
-<div id="4d3117dc" class="cell" data-execution_count="7">
+<div id="f92bcd7b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>f, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">9</span>))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pollution.where(</span>
@@ -564,7 +570,7 @@ Note
 </div>
 </div>
 </div>
-<div id="6ce584d9" class="cell" data-execution_count="8">
+<div id="ab3be76e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rasterstats <span class="im">import</span> point_query</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>city_pollution <span class="op">=</span> point_query(</span>
@@ -589,7 +595,7 @@ Note
 </div>
 </div>
 <p>And we can map these on the city locations:</p>
-<div id="41ed46ee" class="cell" data-execution_count="9">
+<div id="651ee5cc" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cities.assign(</span>
@@ -634,7 +640,7 @@ Note
 <h2 data-number="3.6" class="anchored" data-anchor-id="surface-to-polygons"><span class="header-section-number">3.6</span> Surface to polygons</h2>
 <p>Instead of transferring to points, we want to aggregate all the information in a surface that falls within a polygon.</p>
 <p>For this case, we will use the motorised friction surface. The question we are asking thus is: what is the average degree of friction of each region? Or, in other words: what regions are harder to get through with motorised transport?</p>
-<div id="87e34ffe" class="cell" data-execution_count="10">
+<div id="9664fc16" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">9</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>friction.plot.imshow(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    add_colorbar<span class="op">=</span><span class="va">False</span>, ax<span class="op">=</span>ax</span>
@@ -659,7 +665,7 @@ Note
 </div>
 </div>
 <p>Again, we can rely on <code>rasterstats</code>. The output is returned from <code>zonal_stats</code> as a list of dicts. To make it more manageable, we convert it into a <code>pandas.DataFrame</code>.</p>
-<div id="12fcec0a" class="cell" data-execution_count="11">
+<div id="7af0db8e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rasterstats <span class="im">import</span> zonal_stats</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>regional_friction <span class="op">=</span> pandas.DataFrame(</span>
@@ -729,7 +735,7 @@ Note
 </div>
 </div>
 <p>This can then also be mapped onto the polygon geography:</p>
-<div id="f8a77c87" class="cell" data-execution_count="12">
+<div id="644990bd" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">9</span>))</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>regions.to_crs(</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    epsg<span class="op">=</span><span class="dv">3857</span></span>
@@ -770,20 +776,20 @@ Note
 <section id="surface-to-surface" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="surface-to-surface"><span class="header-section-number">3.7</span> Surface to surface</h2>
 <p>If we want to align the <code>pollution</code> surface with that of <code>friction</code>, we need to resample them to make them “fit on the same frame”.</p>
-<div id="968da819" class="cell" data-execution_count="13">
+<div id="dfffef24" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pollution.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>(138, 152)</code></pre>
 </div>
 </div>
-<div id="6a060c2c" class="cell" data-execution_count="14">
+<div id="9d382357" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>friction.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>(574, 636)</code></pre>
 </div>
 </div>
 <p>This involves either moving one surface to the frame of the other one, or both into an entirely new one. For the sake of the illustration, we will do the latter and select a frame that is 300 by 400 pixels. Note this involves stretching (upsampling) <code>pollution</code>, while compressing (downsampling) <code>friction</code>.</p>
-<div id="d3152e52" class="cell" data-execution_count="15">
+<div id="53a4c175" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define dimensions</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>dimX, dimY <span class="op">=</span> <span class="dv">300</span>, <span class="dv">400</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>minx, miny, maxx, maxy <span class="op">=</span> pollution.rio.bounds()</span>
@@ -797,17 +803,17 @@ Note
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    dims<span class="op">=</span>[<span class="st">"y"</span>, <span class="st">"x"</span>]</span>
 <span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>).rio.write_crs(<span class="dv">4326</span>) <span class="co"># Add CRS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c2b7e748" class="cell" data-execution_count="16">
+<div id="0dee1072" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cvs_pollution <span class="op">=</span> pollution.rio.reproject_match(canvas)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cvs_friction <span class="op">=</span> friction.rio.reproject_match(canvas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="aebafdaf" class="cell" data-execution_count="17">
+<div id="3e885115" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cvs_pollution.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>(400, 300)</code></pre>
 </div>
 </div>
-<div id="b336c92a" class="cell" data-execution_count="18">
+<div id="f65c15bf" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cvs_pollution.shape <span class="op">==</span> cvs_friction.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>True</code></pre>
@@ -847,7 +853,7 @@ Caution
 <p>For this exampe, we will assume that, instead of a surface with pollution values, we only have available a sample of points and we would like to obtain estimates for other locations.</p>
 <p>For that we will first generate 100 random points within the extent of <code>pollution</code> which we will take as the location of our measurement stations.</p>
 <p>The code in this cell contains bits that are a bit more advanced, do not despair if not everything makes sense!</p>
-<div id="f98e1158" class="cell" data-execution_count="19">
+<div id="11011698" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123456</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>bb <span class="op">=</span> pollution.rio.bounds()</span>
@@ -859,7 +865,7 @@ Caution
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Our station values come from the <code>pollution</code> surface, but we assume we do not have access to the latter, and we would like to obtain estimates for the location of the cities:</p>
-<div id="7f7aff38" class="cell" data-execution_count="20">
+<div id="b2115864" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>pollution.where(</span>
@@ -885,14 +891,14 @@ Caution
 </div>
 </div>
 <p>We will need the location and the pollution measurements for every station as separate arrays. Before we do that, since we will be calculating distances, we convert our coordinates to <a href="http://epsg.io/5726">a system</a> expressed in metres.</p>
-<div id="4e0d201a" class="cell" data-execution_count="21">
+<div id="cee4563a" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>stations_mt <span class="op">=</span> stations.to_crs(epsg<span class="op">=</span><span class="dv">5726</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>station_xys <span class="op">=</span> np.array(</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    [stations_mt.geometry.x, stations_mt.geometry.y]</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>).T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We also need to extract the pollution measurements for each station location:</p>
-<div id="67312b6c" class="cell" data-execution_count="22">
+<div id="4fa785f4" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>station_measurements <span class="op">=</span> np.array(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    point_query(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        stations,</span>
@@ -903,7 +909,7 @@ Caution
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And finally, we will also need the locations of each city expressed in the same coordinate system:</p>
-<div id="9f63f651" class="cell" data-execution_count="23">
+<div id="92833e98" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cities_mt <span class="op">=</span> cities.to_crs(epsg<span class="op">=</span><span class="dv">5726</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>city_xys <span class="op">=</span> np.array(</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    [cities_mt.geometry.x, cities_mt.geometry.y]</span>
@@ -911,7 +917,7 @@ Caution
 </div>
 <p>For this illustration, we will use a <span class="math inline">\(k\)</span>-nearest neighbors regression that estimates the value for each target point (<code>cities</code> in our case) as the average weighted by distance of its <span class="math inline">\(k\)</span> nearest neigbours. In this illustration we will use <span class="math inline">\(k=10\)</span>.</p>
 <p>Note how <code>sklearn</code> relies only on array data structures, hence why we first had to express all the required information in that format.</p>
-<div id="cc3644ae" class="cell" data-execution_count="24">
+<div id="90ed8bcb" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> KNeighborsRegressor(</span>
@@ -919,11 +925,11 @@ Caution
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>).fit(station_xys, station_measurements)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once we have trained the model, we can use it to obtain predictions for each city location:</p>
-<div id="fe4cc725" class="cell" data-execution_count="25">
+<div id="e178a360" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> model.predict(city_xys)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>These can be compared with the originally observed values:</p>
-<div id="dff74f64" class="cell" data-execution_count="26">
+<div id="23ac8d30" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>p2p_comparison <span class="op">=</span> pandas.DataFrame(</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    {</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Observed"</span>: city_pollution,</span>
@@ -932,7 +938,7 @@ Caution
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>cities[<span class="st">"UC_NM_MN"</span>]</span>
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b0bf49e3" class="cell" data-execution_count="27">
+<div id="af69b9b8" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>p2p_comparison[<span class="st">"Observed"</span>].plot.kde(ax<span class="op">=</span>ax)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>p2p_comparison[<span class="st">"Predicted"</span>].plot.kde(ax<span class="op">=</span>ax)</span>
@@ -947,7 +953,7 @@ Caution
 </div>
 </div>
 </div>
-<div id="1504905c" class="cell" data-execution_count="28">
+<div id="b90da5e2" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p2p_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <div>
@@ -1046,10 +1052,10 @@ Note
 <h2 data-number="3.9" class="anchored" data-anchor-id="points-to-surface"><span class="header-section-number">3.9</span> Points to surface</h2>
 <p>Imagine we do not have a surface like <code>pollution</code> but we need it. In this context, if you have measurements from some locations, such as in <code>stations</code>, we can use the approach reviewed above to generate a surface. The trick to do this is to realise that we can generate a <em>uniform</em> grid of target locations that we can then express as a surface.</p>
 <p>We will set as our target locations those of the pixels in the target surface we have seen above:</p>
-<div id="efd5a464" class="cell" data-execution_count="29">
+<div id="52c6b1b1" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>canvas_mt <span class="op">=</span> canvas.rio.reproject(<span class="dv">5726</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="1690635b" class="cell" data-execution_count="30">
+<div id="78706af8" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>xy_pairs <span class="op">=</span> canvas_mt.to_series().index</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>xys <span class="op">=</span> np.array(</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    [</span>
@@ -1059,11 +1065,11 @@ Note
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>).T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To obtain pollution estimates at each location, we can <code>predict</code> with <code>model</code>:</p>
-<div id="2713abe0" class="cell" data-execution_count="31">
+<div id="4155a22c" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>predictions_grid <span class="op">=</span> model.predict(xys)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And with these at hand, we can convert them into a surface:</p>
-<div id="943b5377" class="cell" data-execution_count="32">
+<div id="ed94f81b" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>predictions_series <span class="op">=</span> pandas.DataFrame(</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"predictions_grid"</span>: predictions_grid}</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>).join(</span>
@@ -1074,7 +1080,7 @@ Note
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    predictions_series[<span class="st">"predictions_grid"</span>]</span>
 <span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>).rio.write_crs(canvas_mt.rio.crs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="11dd8887" class="cell" data-execution_count="33">
+<div id="0ecc8524" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>f, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>cvs_pollution.where(</span>
@@ -1098,7 +1104,7 @@ Note
 </div>
 </div>
 </div>
-<div id="7e66b758" class="cell" data-execution_count="34">
+<div id="7e525722" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>f, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>cvs_pollution.where(</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    cvs_pollution<span class="op">&gt;</span><span class="dv">0</span></span>
@@ -1139,7 +1145,7 @@ Note
 <h2 data-number="3.10" class="anchored" data-anchor-id="polygons-to-polygons"><span class="header-section-number">3.10</span> Polygons to polygons</h2>
 <p>In this final example, we transfer data from a polygon geography to <em>another</em> polygon geography. Effectively, we re-apportion values from one set of areas to another based on the extent of shared area.</p>
 <p>Our illustration will cover how to move pollution estimates from <code>regions</code> into a uniform hexagonal grid we will first create.</p>
-<div id="24cc9f87" class="cell" data-execution_count="35">
+<div id="5e0d6245" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tobler</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>hex_grid <span class="op">=</span> tobler.util.h3fy(</span>
@@ -1147,7 +1153,7 @@ Note
 <span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Not that pollution is expressed as an intesive (rate) variable. We need to recognise this when specifying the interpolation model:</p>
-<div id="2392be0d" class="cell" data-execution_count="36">
+<div id="acb69fa4" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>pollution_hex <span class="op">=</span> tobler.area_weighted.area_interpolate(</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    regions.assign(geometry<span class="op">=</span>regions.<span class="bu">buffer</span>(<span class="dv">0</span>)).to_crs(epsg<span class="op">=</span><span class="dv">5726</span>),</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    hex_grid.to_crs(epsg<span class="op">=</span><span class="dv">5726</span>), </span>
@@ -1155,7 +1161,7 @@ Note
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And the results look like:</p>
-<div id="61a75ec6" class="cell" data-execution_count="37">
+<div id="32078bf7" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>f, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>regions.plot(</span>
@@ -1642,7 +1648,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./spatial-feature-ii.html" class="pagination-link" aria-label="Spatial feature engineering (II)">
-        <span class="nav-page-text">Spatial feature engineering (II)</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Spatial feature engineering (II)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

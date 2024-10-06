@@ -84,7 +84,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./datasets.html" rel="next">
+<link href="./spatial-feature-i.html" rel="next">
 <link href="./spatial-data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -239,6 +239,24 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Geovisualisation</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial-feature-i.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Spatial feature engineering (I)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial-feature-ii.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Spatial feature engineering (II)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./openstreetmap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">OpenStreetMap</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -274,7 +292,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#modules" id="toc-modules" class="nav-link active" data-scroll-target="#modules"><span class="header-section-number">2.1</span> Modules</a></li>
+  <li><a href="#packages-and-modules" id="toc-packages-and-modules" class="nav-link active" data-scroll-target="#packages-and-modules"><span class="header-section-number">2.1</span> Packages and modules</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2.2</span> Data</a></li>
   <li><a href="#choropleths" id="toc-choropleths" class="nav-link" data-scroll-target="#choropleths"><span class="header-section-number">2.3</span> Choropleths</a>
   <ul class="collapse">
@@ -317,9 +335,9 @@ div.csl-indent {
 <li>This <a href="https://geographicdata.science/book/notebooks/05_choropleth.html">Chapter</a> of the GDS Book <span class="citation" data-cites="reyABwolf">(<a href="references.html#ref-reyABwolf" role="doc-biblioref">Rey, Arribas-Bel, and Wolf forthcoming</a>)</span> , discussing choropleths in more detail.</li>
 </ul>
 <p>Additionally, parts of this block are based and sourced from Chapters 2, 3 and 4 from the on-line course “A course in Geographic Data Science”, by Dr Elisabetta Pietrostefani and Dr Carmen Cabrera-Arnau <span class="citation" data-cites="courseGDS-pietrostefani-cabrera">(<a href="references.html#ref-courseGDS-pietrostefani-cabrera" role="doc-biblioref">Pietrostefani and Cabrera-Arnau 2024</a>)</span>. This course also provides code in R.</p>
-<section id="modules" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="modules"><span class="header-section-number">2.1</span> Modules</h2>
-<div id="7494adbc" class="cell" data-execution_count="1">
+<section id="packages-and-modules" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="packages-and-modules"><span class="header-section-number">2.1</span> Packages and modules</h2>
+<div id="8d5e7553" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray, rioxarray</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> contextily</span>
@@ -335,11 +353,11 @@ div.csl-indent {
 <h2 data-number="2.2" class="anchored" data-anchor-id="data"><span class="header-section-number">2.2</span> Data</h2>
 <p>If you want to read more about the data sources behind this dataset, head to the <a href="./data/datasets">Datasets</a> section.</p>
 <p>Assuming you have the file locally on the path <code>./data/</code>:</p>
-<div id="0556b254" class="cell" data-execution_count="2">
+<div id="b1561d9c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> geopandas.read_file(<span class="st">"./data/cambodia_regional.gpkg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Quick visualisation:</p>
-<div id="492ecd9b" class="cell" data-execution_count="3">
+<div id="e8fde502" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>db.to_crs(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    epsg<span class="op">=</span><span class="dv">3857</span></span>
@@ -366,7 +384,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<div id="ac98bce7" class="cell" data-execution_count="4">
+<div id="444dcb45" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>db.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'geopandas.geodataframe.GeoDataFrame'&gt;
@@ -386,13 +404,13 @@ memory usage: 9.4+ KB</code></pre>
 </div>
 <p>We will use the average measurement of <a href="http://www.tropomi.eu/data-products/nitrogen-dioxide">nitrogen dioxide</a> (<code>no2_mean</code>) by region throughout the block.</p>
 <p>To make visualisation a bit easier below, we create an additional column with values rescaled:</p>
-<div id="461a88b1" class="cell" data-execution_count="5">
+<div id="d875a433" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>db[<span class="st">"no2_viz"</span>] <span class="op">=</span> db[<span class="st">"no2_mean"</span>] <span class="op">*</span> <span class="fl">1e5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This way, numbers are larger and will fit more easily on legends:</p>
-<div id="7caa5cc3" class="cell" data-execution_count="6">
+<div id="d655c40b" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>db[[<span class="st">"no2_mean"</span>, <span class="st">"no2_viz"</span>]].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="222">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
@@ -454,7 +472,7 @@ memory usage: 9.4+ KB</code></pre>
 </section>
 <section id="choropleths" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="choropleths"><span class="header-section-number">2.3</span> Choropleths</h2>
-<div id="4b465e9e" class="cell" data-execution_count="7">
+<div id="d85e6c42" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>db.to_crs(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    epsg<span class="op">=</span><span class="dv">3857</span></span>
@@ -482,13 +500,13 @@ memory usage: 9.4+ KB</code></pre>
 </div>
 <section id="a-classiffication-problem" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="a-classiffication-problem"><span class="header-section-number">2.3.1</span> A classiffication problem</h3>
-<div id="3800d7ce" class="cell" data-execution_count="8">
+<div id="11f20e55" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>db[<span class="st">"no2_viz"</span>].unique().shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="224">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>(198,)</code></pre>
 </div>
 </div>
-<div id="fc4c16b6" class="cell" data-execution_count="9">
+<div id="838a68ea" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sns.displot(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    db, x<span class="op">=</span><span class="st">"no2_viz"</span>, kde<span class="op">=</span><span class="va">True</span>, aspect<span class="op">=</span><span class="dv">2</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -518,7 +536,7 @@ Important
 <p>To build an intuition behind each classification algorithm more easily, we create a helper method (<code>plot_classi</code>) that generates a visualisation of a given classification.</p>
 </div>
 </div>
-<div id="dde4df91" class="cell" data-execution_count="10">
+<div id="7353e4c2" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_classi(classi, col, db):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Illustrate a classiffication</span></span>
@@ -554,10 +572,10 @@ Important
 <ul>
 <li>Equal intervals</li>
 </ul>
-<div id="bd465d89" class="cell" data-execution_count="11">
+<div id="6a3e7818" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>classi <span class="op">=</span> mc.EqualInterval(db[<span class="st">"no2_viz"</span>], k<span class="op">=</span><span class="dv">7</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>classi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="227">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>EqualInterval
 
    Interval      Count
@@ -571,7 +589,7 @@ Important
 (10.76, 12.32] |     5</code></pre>
 </div>
 </div>
-<div id="ed09008e" class="cell" data-execution_count="12">
+<div id="ef6d17bc" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plot_classi(classi, <span class="st">"no2_viz"</span>, db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -584,10 +602,10 @@ Important
 <ul>
 <li>Quantiles</li>
 </ul>
-<div id="f8c4af82" class="cell" data-execution_count="13">
+<div id="d1813f75" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>classi <span class="op">=</span> mc.Quantiles(db[<span class="st">"no2_viz"</span>], k<span class="op">=</span><span class="dv">7</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>classi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="229">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>Quantiles
 
    Interval      Count
@@ -601,7 +619,7 @@ Important
 ( 3.76, 12.32] |    29</code></pre>
 </div>
 </div>
-<div id="aa598913" class="cell" data-execution_count="14">
+<div id="1d990995" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plot_classi(classi, <span class="st">"no2_viz"</span>, db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -614,10 +632,10 @@ Important
 <ul>
 <li>Fisher-Jenks</li>
 </ul>
-<div id="65018c4d" class="cell" data-execution_count="15">
+<div id="7815100a" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>classi <span class="op">=</span> mc.FisherJenks(db[<span class="st">"no2_viz"</span>], k<span class="op">=</span><span class="dv">7</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>classi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="231">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>FisherJenks
 
    Interval      Count
@@ -631,7 +649,7 @@ Important
 ( 9.19, 12.32] |     5</code></pre>
 </div>
 </div>
-<div id="cfdd392f" class="cell" data-execution_count="16">
+<div id="0321bddf" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plot_classi(classi, <span class="st">"no2_viz"</span>, db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -643,9 +661,9 @@ Important
 </div>
 <hr>
 <p>Now let’s dig into the internals of <code>classi</code>:</p>
-<div id="60f7fe9e" class="cell" data-execution_count="17">
+<div id="9936de1d" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>classi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="233">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>FisherJenks
 
    Interval      Count
@@ -659,22 +677,22 @@ Important
 ( 9.19, 12.32] |     5</code></pre>
 </div>
 </div>
-<div id="f0c9dde5" class="cell" data-execution_count="18">
+<div id="cdabb53e" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>classi.k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="234">
+<div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>7</code></pre>
 </div>
 </div>
-<div id="ed9c4fe4" class="cell" data-execution_count="19">
+<div id="a962fcbe" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>classi.bins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="235">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>array([ 2.05617382,  2.6925931 ,  3.30281182,  4.19124954,  5.63804861,
         9.19190206, 12.32332434])</code></pre>
 </div>
 </div>
-<div id="63967b0b" class="cell" data-execution_count="20">
+<div id="ee2d6ed9" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>classi.yb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="236">
+<div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>array([2, 3, 3, 1, 1, 2, 1, 1, 1, 0, 0, 3, 2, 1, 1, 1, 3, 1, 1, 1, 2, 0,
        0, 4, 2, 1, 3, 1, 0, 0, 0, 1, 2, 2, 6, 5, 4, 2, 1, 3, 2, 3, 2, 1,
        2, 3, 2, 3, 1, 1, 3, 1, 2, 3, 3, 1, 3, 3, 1, 0, 1, 1, 3, 2, 0, 0,
@@ -691,7 +709,7 @@ Important
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="how-many-colors"><span class="header-section-number">2.3.3</span> How <em>many</em> colors?</h3>
 <p>The code used to generate the next figure uses more advanced features than planned for this course.</p>
 <p>If you want to inspect it, look at the code cell below.</p>
-<div id="7a3dde90" class="cell" data-execution_count="21">
+<div id="2553fcb8" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>vals <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>]</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>algos <span class="op">=</span> [<span class="st">"equal_interval"</span>, <span class="st">"quantiles"</span>, <span class="st">"fisherjenks"</span>]</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>f, axs <span class="op">=</span> plt.subplots(</span>
@@ -743,7 +761,7 @@ Important
 <ul>
 <li>Directly within <code>plot</code> (only for some algorithms)</li>
 </ul>
-<div id="ade03323" class="cell" data-execution_count="22">
+<div id="e71ee18e" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>db.plot(</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"no2_viz"</span>, scheme<span class="op">=</span><span class="st">"quantiles"</span>, k<span class="op">=</span><span class="dv">7</span>, legend<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax</span>
@@ -775,7 +793,7 @@ Note
 <section id="manual-approach" class="level4" data-number="2.3.5.2">
 <h4 data-number="2.3.5.2" class="anchored" data-anchor-id="manual-approach"><span class="header-section-number">2.3.5.2</span> Manual approach</h4>
 <p>This is valid for any algorithm and provides much more flexibility at the cost of effort.</p>
-<div id="43d4dff7" class="cell" data-execution_count="23">
+<div id="7dd006c8" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>classi <span class="op">=</span> mc.Quantiles(db[<span class="st">"no2_viz"</span>], k<span class="op">=</span><span class="dv">7</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
@@ -795,10 +813,10 @@ Note
 </section>
 <section id="value-by-alpha-mapping" class="level4" data-number="2.3.5.3">
 <h4 data-number="2.3.5.3" class="anchored" data-anchor-id="value-by-alpha-mapping"><span class="header-section-number">2.3.5.3</span> Value by alpha mapping</h4>
-<div id="ed870640" class="cell" data-execution_count="24">
+<div id="7f8aaa71" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>db[<span class="st">'area_inv'</span>] <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> db.to_crs(epsg<span class="op">=</span><span class="dv">5726</span>).area</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f6ef36cc" class="cell" data-execution_count="25">
+<div id="d745ef17" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>db.plot(<span class="st">'area_inv'</span>, scheme<span class="op">=</span><span class="st">'quantiles'</span>, ax<span class="op">=</span>ax)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'area_inv'</span>)</span>
@@ -813,7 +831,7 @@ Note
 </div>
 </div>
 </div>
-<div id="167ecc61" class="cell" data-execution_count="26">
+<div id="475f76b3" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up figure and axis</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">9</span>))</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># VBA choropleth</span></span>
@@ -861,7 +879,7 @@ Warning
 </div>
 </div>
 <p>Here is an example:</p>
-<div id="a0c89ca1" class="cell" data-execution_count="27">
+<div id="e5618b3e" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">9</span>))</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>classi <span class="op">=</span> mc.Quantiles(db[<span class="st">"no2_viz"</span>], k<span class="op">=</span><span class="dv">7</span>)</span>
@@ -908,24 +926,24 @@ Note
 <section id="choropleths-on-surfaces" class="level3" data-number="2.3.6">
 <h3 data-number="2.3.6" class="anchored" data-anchor-id="choropleths-on-surfaces"><span class="header-section-number">2.3.6</span> Choropleths on surfaces</h3>
 <p>Assuming you have the file locally on the path <code>./data/</code>:</p>
-<div id="10a2a15c" class="cell" data-execution_count="28">
+<div id="e36b6dc8" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> xarray.open_rasterio(</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"./data/cambodia_s5_no2.tif"</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>).sel(band<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/79/65l52xsj7vq_4_t_l6k5bl2c0000gn/T/ipykernel_25724/3548825724.py:1: DeprecationWarning:
+<pre><code>/var/folders/79/65l52xsj7vq_4_t_l6k5bl2c0000gn/T/ipykernel_30848/3548825724.py:1: DeprecationWarning:
 
 open_rasterio is Deprecated in favor of rioxarray. For information about transitioning, see: https://corteva.github.io/rioxarray/stable/getting_started/getting_started.html
 </code></pre>
 </div>
 </div>
-<div id="e8548728" class="cell" data-execution_count="29">
+<div id="3b67ba77" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> rioxarray.open_rasterio(<span class="st">"./data/cambodia_s5_no2.tif"</span>).sel(band<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Implicit continuous equal interval</li>
 </ul>
-<div id="c6e52cef" class="cell" data-execution_count="30">
+<div id="61ce4338" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>grid.where(</span>
@@ -941,7 +959,7 @@ open_rasterio is Deprecated in favor of rioxarray. For information about transit
 </div>
 </div>
 </div>
-<div id="b63844aa" class="cell" data-execution_count="31">
+<div id="6df93900" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>grid.where(</span>
@@ -960,7 +978,7 @@ open_rasterio is Deprecated in favor of rioxarray. For information about transit
 <ul>
 <li>Discrete equal interval</li>
 </ul>
-<div id="84c91a4b" class="cell" data-execution_count="32">
+<div id="c4c16b4d" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>grid.where(</span>
@@ -979,7 +997,7 @@ open_rasterio is Deprecated in favor of rioxarray. For information about transit
 <ul>
 <li>Combining with <code>mapclassify</code></li>
 </ul>
-<div id="dac3b937" class="cell" data-execution_count="33">
+<div id="bdada34b" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>grid_nona <span class="op">=</span> grid.where(</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    grid <span class="op">!=</span> grid.rio.nodata</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1004,7 +1022,7 @@ open_rasterio is Deprecated in favor of rioxarray. For information about transit
 </div>
 </div>
 </div>
-<div id="29947bb3" class="cell" data-execution_count="34">
+<div id="9c940101" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>grid_nona <span class="op">=</span> grid.where(</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    grid <span class="op">!=</span> grid.rio.nodata</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1029,7 +1047,7 @@ open_rasterio is Deprecated in favor of rioxarray. For information about transit
 </div>
 </div>
 </div>
-<div id="3dbac83f" class="cell" data-execution_count="35">
+<div id="5f9c3dc3" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>grid_nona <span class="op">=</span> grid.where(</span>
@@ -1054,7 +1072,7 @@ open_rasterio is Deprecated in favor of rioxarray. For information about transit
 </div>
 </div>
 </div>
-<div id="27e51452" class="cell" data-execution_count="36">
+<div id="0419d74b" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>grid_nona <span class="op">=</span> grid.where(</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    grid <span class="op">!=</span> grid.rio.nodata</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1552,8 +1570,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./datasets.html" class="pagination-link" aria-label="Data sets">
-        <span class="nav-page-text">Data sets</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./spatial-feature-i.html" class="pagination-link" aria-label="Spatial feature engineering (I)">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Spatial feature engineering (I)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
