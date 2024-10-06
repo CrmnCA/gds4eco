@@ -1,13 +1,15 @@
 ---
-format:
-  html:
-    code-fold: false
-jupyter: python3
+title: Transport costs
+jupyter:
+  kernelspec:
+    display_name: GDS-10.0
+    language: python
+    name: gds
 ---
 
-# Transport costs {#sec-transport-costs}
+## 📖 Ahead of time...
 
-## Packages and modules
+## 💻 Hands-on coding
 
 ```{python}
 import momepy
@@ -26,17 +28,43 @@ ox.settings.overpass_settings = (
 )
 ```
 
-## Data
+\`\`\`\`{tabbed} Local files
 
-Assuming you have the file locally on the path `./data/`:
+Assuming you have the file locally on the path `../data/`:
 
-```{python}
-streets = geopandas.read_file("./data/arturo_streets.gpkg")
-abbs = geopandas.read_file("./data/madrid_abb.gpkg")
-neis = geopandas.read_file("./data/neighbourhoods.geojson")
+``` python
+streets = geopandas.read_file("../data/arturo_streets.gpkg")
+abbs = geopandas.read_file("../data/madrid_abb.gpkg")
+neis = geopandas.read_file("../data/neighbourhoods.geojson")
 ```
 
-## `pandana` graphs
+````         
+
+````{tabbed} Online read
+
+If you're online, you can do:
+
+```python
+streets = geopandas.read_file(
+    "https://darribas.org/gds4ae/_downloads/67d5480f98453027d59bf49606a7ad92/arturo_streets.gpkg"
+)
+abbs = geopandas.read_file(
+    "https://github.com/GDSL-UL/san/raw/v0.1.0/data/assignment_1_madrid/madrid_abb.gpkg"
+)
+neis = geopandas.read_file(
+    "http://darribas.org/gds4ae/_downloads/44b4bc22c042386c2c0f8dc6685ef17c/neighbourhoods.geojson"
+)
+```
+````
+
+```{python}
+#| tags: [remove-cell]
+streets = geopandas.read_file("../data/arturo_streets.gpkg")
+abbs = geopandas.read_file("../data/madrid_abb.gpkg")
+neis = geopandas.read_file("../data/neighbourhoods.geojson")
+```
+
+#### `pandana` graphs
 
 ```{python}
 import pandana
@@ -45,12 +73,13 @@ import pandana
 Before building the routing network, we convert to graph and back in `momepy` to "clean" the network and ensure it complies with requirements for routing.
 
 ```{python}
+%%time
 nodes, edges = momepy.nx_to_gdf( # Convert back to geo-table
     momepy.gdf_to_nx(            # Convert to a clean NX graph
         streets.explode(index_parts='True')        # We "explode" to avoid multi-part rows
     )
 )
-nodes = nodes.set_index("nodeID") # Reindex nodes on ID
+nodes = nodes.set_index("nodeID")# Reindex nodes on ID
 ```
 
 Once we have nodes and edges "clean" from the graph representation, we can build a `pandana.Network` object we will use for routing:
@@ -67,7 +96,7 @@ streets_pdn = pandana.Network(
 streets_pdn
 ```
 
-## Shortest-path routing
+#### Shortest-path routing
 
 *How do I go from A to B?*
 
@@ -81,7 +110,7 @@ first = abbs.loc[[0], :].to_crs(streets.crs)
 
 ```{python}
 import geopy
-geopy.geocoders.options.default_user_agent = "gds4eco"
+geopy.geocoders.options.default_user_agent = "gds4ae"
 sol = geopandas.tools.geocode(
     "Puerta del Sol, Madrid", geopy.Nominatim
 ).to_crs(streets.crs)
@@ -107,9 +136,13 @@ route_nodes = streets_pdn.shortest_path(
 route_nodes
 ```
 
-With this information, we can build the route line manually.
+With this information, we can build the route line manually:
 
+```{margin}
 The code to generate the route involves writing a function and is a bit more advanced than expected for this course. If this looks too complicated, do not despair.
+
+Also, please note this builds a *simplified* line for the route, not one that is based on the original geometries (distance calculations *are* based on the original network).
+```
 
 ```{python}
 from shapely.geometry import LineString
@@ -130,35 +163,27 @@ We can calculate the route:
 route = route_nodes_to_line(route_nodes, streets_pdn)
 ```
 
-And we get it back as a geo-table (with one row):
-
 ```{python}
-route
-```
-
-Please note this builds a *simplified* line for the route, not one that is based on the original geometries.
-
-```{python}
-
-fig, ax = plt.subplots()
-
-route.plot(
+#| tags: [margin, remove-input]
+ax = route.plot(
     figsize=(9, 9),
-    color="red",
-    ax=ax
+    color="red"
 )
-
 contextily.add_basemap(
     ax, 
     crs=route.crs,
     source=contextily.providers.CartoDB.Voyager,
     zoom=14
 )
-
-plt.show()
 ```
 
-But distance calculations *are* based on the original network). If we wanted to obtain the length of the route:
+And we get it back as a geo-table (with one row):
+
+```{python}
+route
+```
+
+If we wanted to obtain the length of the route:
 
 ```{python}
 route_len = streets_pdn.shortest_path_length(
@@ -167,44 +192,28 @@ route_len = streets_pdn.shortest_path_length(
 round(route_len / 1000, 3) # Dist in Km
 ```
 
-::: callout-note
-**Challenge:**
+`{admonition} Challenge * What is the network distance between CEMFI and Puerta del Sol? * BONUS I: how much longer is it than if you could fly in a straight line? * BONUS II: if one walks at a speed of 5 Km/h, how long does the walk take you?`
 
-\- What is the network distance between CEMFI and Puerta del Sol?
-
-\- BONUS I: how much longer is it than if you could fly in a straight line?
-
-\- BONUS II: if one walks at a speed of 5 Km/h, how long does the walk take you?
-:::
-
-## Weighted routing
+#### Weighted routing
 
 *How do I go from A to B passing by the "best" buildings?*
 
 This is really an extension of standard routing that takes advantage of the flexibility of `pandana.Network` objects.
 
-Note that the `route` we defined above, does not pass by the "best" buildings.
-
 ```{python}
+#| tags: [remove-input, margin]
 bb = route.total_bounds
-
-fig, ax = plt.subplots()
-
-streets.cx[
+ax = streets.cx[
     bb[0]: bb[2], bb[1]:bb[3]
 ].plot(
-    "average_quality", scheme="quantiles", ax=ax
+    "average_quality", scheme="quantiles"
 )
-
 route.plot(color="r", linewidth=2.5, ax=ax)
-
 ax.set_title("Mean Building Quality")
-ax.set_axis_off()
-
-plt.show()
+ax.set_axis_off();
 ```
 
-The overall process to achieve this is the very similar; the main difference is, when we build the `Network` object, to replace distance (`mm_len`) with a measure that *combines* distance and building quality. Note that we want to *maximise* building quality, but the routing algorithms use a *minimisation* function. Hence, our composite index will need to reflect that.
+The overall process is the same; the main difference is, when we build the `Network` object, to replace distance (`mm_len`) with a measure that *combines* distance and building quality. Note that we want to *maximise* building quality, but the routing algorithms use a *minimisation* function. Hence, our composite index will need to reflect that.
 
 The strategy is divided in the following steps:
 
@@ -226,13 +235,10 @@ Then generate and attach to `edges` a scaled version of `mm_len`:
 edges["scaled_dist"] = minmax_scale(edges["mm_len"])
 ```
 
-We can compare distance with scaled distance. The correlation should be perfect, the scaling is only a change of scale or unit.
-
 ```{python}
-fig, ax = plt.subplots()
-edges.plot.scatter("mm_len", "scaled_dist", ax=ax)
-ax.set_title("Distance Vs Scaled Distance")
-plt.show()
+#| tags: [margin, remove-input]
+ax = edges.plot.scatter("mm_len", "scaled_dist")
+ax.set_title("Distance Vs Scaled Distance");
 ```
 
 We move on to 2., with a similar approach. We will use the negative of the building quality average (`average_quality`):
@@ -243,15 +249,12 @@ edges["scaled_inv_bquality"] = minmax_scale(
 )
 ```
 
-And again, we can plot the relation between building quality and the scaled quality.
-
 ```{python}
-fig, ax = plt.subplots()
-edges.plot.scatter(
-    "average_quality", "scaled_inv_bquality", ax=ax
+#| tags: [margin, remove-input]
+ax = edges.plot.scatter(
+    "average_quality", "scaled_inv_bquality"
 )
-ax.set_title("Quality Vs Inv. Scaled Quality")
-plt.show()
+ax.set_title("Quality Vs Inv. Scaled Quality");
 ```
 
 Taking 1. and 2. into 3. we can build `wdist`. For this example, we will give each dimension the same weight (0.5), but this is at discretion of the researcher.
@@ -293,15 +296,14 @@ w_route = route_nodes_to_line(
 Now we are ready to display it on a map:
 
 ```{python}
-fig, ax = plt.subplots()
+#| tags: [hide-input]
 # Building quality
-streets.plot(
+ax = streets.plot(
     "average_quality", 
     scheme="quantiles", 
     cmap="magma",
     linewidth=0.5,
-    figsize=(9, 9), 
-    ax=ax
+    figsize=(9, 9)
 )
 # Shortest route
 route.plot(
@@ -313,19 +315,12 @@ w_route.plot(
 )
 # Styling
 ax.set_axis_off()
-plt.legend()
-plt.show()
+plt.legend();
 ```
 
-::: callout-note
-**Challenge:**
+`{admonition} Challenge 1. Explore the differences in the output of weighted routing if you change the weight between distance and the additional constrain. 2. Recreate weighted routing using the linearity of street segments. How can you go from A to B avoiding long streets?`
 
-1\. Explore the differences in the output of weighted routing if you change the weight between distance and the additional constrain.
-
-2\. Recreate weighted routing using the linearity of street segments. How can you go from A to B avoiding long streets?
-:::
-
-## Proximity
+#### Proximity
 
 *What is the nearest internet cafe for Airbnb's without WiFi?*
 
@@ -346,21 +341,17 @@ icafes = ox.features_from_place(
 ```
 
 ```{python}
-fig, ax = plt.subplots()
-
-no_wifi.plot(
+#| tags: [hide-input]
+ax = no_wifi.plot(
     color="red", 
     markersize=1,
     alpha=0.5,
     label="Airbnb no WiFi",
-    figsize=(9, 9),
-    ax=ax
+    figsize=(9, 9)
 )
-
 icafes.plot(
     ax=ax, color="lime", label="Internet cafes"
 )
-
 contextily.add_basemap(
     ax, 
     crs=no_wifi.crs,
@@ -378,7 +369,11 @@ The logic for this operation is the following:
 3.  Find the nearest node to each Airbnb without WiFi
 4.  Connect each Airbnb to its nearest internet cafe
 
-We can add the internet cafes to the network object (1.) with the `set_pois` method. Note we set `maxitems=1` because we are only going to query for the nearest cafe. This will make computations much faster.
+We can add the internet cafes to the network object (1.) with the `set_pois` method:
+
+```{margin}
+Note we set `maxitems=1` because we are only going to query for the nearest cafe. This will make computations much faster
+```
 
 ```{python}
 streets_pdn.set_pois(
@@ -390,7 +385,11 @@ streets_pdn.set_pois(
 )
 ```
 
-Once the cafes are added to the network, we can find the nearest one to each node (2.). Note there are some nodes for which we can't find a nearest cafe. These are related to disconnected parts of the network.
+Once the cafes are added to the network, we can find the nearest one to each node (2.):
+
+```{margin}
+Note there are some nodes for which we can't find a nearest cafe. These are related to disconnected parts of the network
+```
 
 ```{python}
 cafe2nnode = streets_pdn.nearest_pois(
@@ -407,7 +406,9 @@ cafe2nnode = streets_pdn.nearest_pois(
 cafe2nnode.head()
 ```
 
-To make things easier down the line, we can link `cafe2nnode` to the cafe IDs. And we can also link Airbnb's to nodes (3.) following a similar approach as we have seen above:
+Note that, to make things easier down the line, we can link `cafe2nnode` to the cafe IDs.
+
+And we can also link Airbnb's to nodes (3.) following a similar approach as we have seen above:
 
 ```{python}
 abbs_nnode = streets_pdn.get_node_ids(
@@ -416,7 +417,7 @@ abbs_nnode = streets_pdn.get_node_ids(
 abbs_nnode.head()
 ```
 
-Finally, we can bring together both to find out what is the nearest internet cafe for each Airbnb (4.).
+Finally, we can bring together both to find out what is the nearest internet cafe for each Airbnb (4.):
 
 ```{python}
 abb_icafe = no_wifi[
@@ -430,23 +431,23 @@ abb_icafe = no_wifi[
 abb_icafe.head()
 ```
 
-::: callout-note
-**Challenge:** Calculate distances to nearest internet cafe for ABBs *with* WiFi. On average, which of the two groups (with and without WiFi) are closer to internet cafes?
-:::
+`{admonition} Challenge Calculate distances to nearest internet cafe for ABBs *with* WiFi. On average, which of the two groups (with and without WiFi) are closer to internet cafes?`
 
-## Accessibility
+#### Accessibility
 
-This flips the previous question on its head and, instead of asking what is the nearest POI to a given point, along the network (irrespective of distance), it asks how many POIs can I access within a network-based distance radius?
+This flips the previous question on its head and, instead of asking what is the nearest POI to a given point, along the network (irrespective of distance), it asks *how many POIs can I access within a network-based distance radious?*
 
 ```{python}
+#| tags: []
+%%time
 parks = ox.features_from_place(
     "Madrid, Spain", tags={"leisure": "park"}
 ).to_crs(streets.crs)
 ```
 
--   For example, how many parks are within 500m(-euclidean) of an Airbnb?
+*How many parks are within 500m(-euclidean) of an Airbnb?*
 
-We draw a radius of 500m around each AirBnb:
+We draw a radious of 500m around each AirBnb:
 
 ```{python}
 buffers = geopandas.GeoDataFrame(
@@ -468,9 +469,9 @@ park_count = geopandas.sjoin(
 ).size()
 ```
 
--   How many parks are within 500m(-network) of an Airbnb?
+*How many parks are within 500m(-network) of an Airbnb?*
 
-We need to approach this as a calculation within the network. The logic of steps thus looks like:
+We need to approach this as a calculation *within* the network. The logic of steps thus looks like:
 
 1.  Use the aggregation module in `pandana` to count the number of parks within 500m of each node in the network
 2.  Extract the counts for the nodes nearest to Airbnb properties
@@ -512,7 +513,7 @@ abbs_nnode = streets_pdn.get_node_ids(
 )
 ```
 
-And use the list to assign the count of the nearest node to each Airbnb:
+And use the list to asign the count of the nearest node to each Airbnb:
 
 ```{python}
 park_count_network = abbs_nnode.map(
@@ -521,7 +522,7 @@ park_count_network = abbs_nnode.map(
 park_count_network.head()
 ```
 
--   For which areas do both differ most?
+*For which areas do both differ most?*
 
 We can compare the two counts above to explore to what extent the street layout is constraining access to nearby parks.
 
@@ -537,19 +538,19 @@ park_comp = geopandas.GeoDataFrame(
 ```
 
 ```{python}
-fig, ax = plt.subplots()
-park_comp.plot.scatter("Euclidean", "Network", ax=ax)
-ax.axline([0, 0], [1, 1], color='red') #45-degree line
-plt.show()
+ax = park_comp.plot.scatter("Euclidean", "Network")
+ax.axline([0, 0], [1, 1], color='red');# 45deg line
 ```
 
-Note there are a few cases where there are more network counts than Euclidean. These are due to the slight inaccuracies introduced by calculating network distances from nodes rather than the locations themselves.
+And, geographically:
 
-Geographically:
+```{margin}
+Note there are a few cases where there are more network counts than Euclidean. These are due to the slight inaccuracies introduced by calculating network distances from nodes rather than the locations themselves
+```
 
 ```{python}
-
-fig, axs = plt.subplots(1, 3, figsize=(15, 5))
+#| tags: [hide-input]
+f, axs = plt.subplots(1, 3, figsize=(15, 5))
 
 # Euclidean count
 abbs.to_crs(
@@ -561,6 +562,7 @@ abbs.to_crs(
     scheme="fisherjenkssampled", 
     alpha=0.5,
     markersize=1,
+    figsize=(9, 9),
     legend=True,
     ax=axs[0]
 )
@@ -589,6 +591,7 @@ abbs.to_crs(
     scheme="fisherjenkssampled", 
     alpha=0.5,
     markersize=1,
+    figsize=(9, 9),
     legend=True,
     ax=axs[1]
 )
@@ -610,6 +613,7 @@ abbs.to_crs(
     scheme="fisherjenkssampled", 
     alpha=0.5,
     markersize=1,
+    figsize=(9, 9),
     legend=True,
     ax=axs[2]
 )
@@ -624,13 +628,11 @@ axs[2].set_title("Network Distances")
 plt.show()
 ```
 
-::: callout-note
-**Challenge:** Calculate accessibility to *other* ABBs from each ABB through the network. *How many ABBs can you access within 500m of each ABB?*
+\`\`\`{admonition} Challenge Calculate accessibility to *other* ABBs from each ABB through the network. *How many ABBs can you access within 500m of each ABB?*
 
-Note you will need to use the locations of ABBs both as the source and the target for routing in this case.
-:::
+Note you will need to use the locations of ABBs both as the source and the target for routing in this case. \`\`\`
 
-## Next steps
+## 🐾 Next steps
 
 If you found the content in this block useful, the following resources represent some suggestions on where to go next:
 
