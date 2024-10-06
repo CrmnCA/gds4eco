@@ -134,6 +134,6 @@ Some help along the way with:
 
 1.  [Geographic Data Science with Python](https://geographicdata.science/book/intro.html).
 
-2.  [Python for Geographic Data Analysis](https://pythongis.org/index.html)
+2.  [Python for Geographic Data Analysis](https://pythongis.org/index.html).
 
 3.  [A course in Geographic Data Science, with R and Python](https://pietrostefani.github.io/gds/).

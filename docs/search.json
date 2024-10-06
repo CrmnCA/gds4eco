@@ -1624,5 +1624,16 @@
       "Epilogue",
       "Datasets"
     ]
+  },
+  {
+    "objectID": "quarto-notebooks/download.html",
+    "href": "quarto-notebooks/download.html",
+    "title": "Download data folders from GitHub",
+    "section": "",
+    "text": "Go to https://download-directory.github.io\n\n\n\nGo to the folder you need for your Lab. For example copy: https://github.com/pietrostefani/gds/tree/main/data/London\n\n\n\nPaste it in the green box… give it a few minutes\nCheck your downloads file and unzip",
+    "crumbs": [
+      "Introduction",
+      "Download data folders from GitHub"
+    ]
   }
 ]
