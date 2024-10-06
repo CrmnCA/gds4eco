@@ -28,20 +28,20 @@ This dataset has been directly sourced from the website [Inside Airbnb](http://i
 
 This dataset contains neighbourhood boundaries for the city of Madrid, as provided by Inside Airbnb.
 
-- Data file [neighbourhoods.geojson]().
+- Data file [neighbourhoods.geojson](https://github.com/CrmnCA/gds4eco/blob/main/data/neighbourhoods.geojson).
 - Furhter information: [`[URL]`](http://insideairbnb.com/madrid/).
 
-`<a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"`{=html}<img src="https://licensebuttons.net/l/zero/1.0/88x31.png" alt="License" style="border-width:0"/></a><br />This dataset is licensed under a `<a rel="license" href="https://creativecommons.org/publicdomain/zero/1.0/"`{=html}CC0 1.0 Universal Public Domain Dedication</a>.
+This dataset is licensed under a [license](https://creativecommons.org/publicdomain/zero/1.0/) CC0 1.0 Universal Public Domain Dedication.
 
 ### Arturo
 
 This dataset contains the street layout of Madrid as well as scores of habitability, where available, associated with street segments. The data originate from the [Arturo Project](http://arturo.300000kms.net), by [300,000Km/s](https://300000kms.net), and the available file here is a slimmed down version of their official [street layout](http://arturo.300000kms.net/#10) distributed by the project.
 
-- Data file download `arturo_streets.gpkg`
-- Code used to generate the file [`[Page]`](arturo_streets_prep)
+- Data file download [`arturo_streets.gpkg`](https://github.com/CrmnCA/gds4eco/blob/main/data/arturo_streets.gpkg).
+- Code used to generate the file [`[Page]`](https://github.com/CrmnCA/gds4eco/blob/main/data/arturo_streets_prep.ipynb), borrowed from [here](https://github.com/darribas/gds4ae/blob/master/content/data/arturo_streets_prep.ipynb).
 - Furhter information [`[URL]`](https://arturo.300000kms.net)
 
-`<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"`{=html}<img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This dataset is licensed under a `<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"`{=html}Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+This dataset is licensed under a [license](https://creativecommons.org/publicdomain/zero/1.0/) CC0 1.0 Universal Public Domain Dedication.
 
 ### Sentinel 2 - 120m mosaic
 
@@ -54,21 +54,21 @@ This dataset contains four scenes for the region of Madrid (Spain) extracted fro
 
 Each scene includes red, green, blue and near-infrared bands.
 
--  Data files ({download}`Jan 1st <madrid_scene_s2_120_2019-1-1.tif>`, {download}`Apr 1st <madrid_scene_s2_120_2019-4-1.tif>`, {download}`Jul 10th <madrid_scene_s2_120_2019-7-10.tif>`, {download}`Nov 27th <madrid_scene_s2_120_2019-11-27.tif>`)
-- Code used to generate the file [`[Page]`](madrid_s2)
+-  Data files ([`Jan 1st madrid_scene_s2_120_2019-1-1.tif`](https://github.com/CrmnCA/gds4eco/blob/main/data/madrid_scene_s2_120_2019-1-1.tif), [`Apr 1st madrid_scene_s2_120_2019-4-1.tif`](https://github.com/CrmnCA/gds4eco/blob/main/data/madrid_scene_s2_120_2019-4-1.tif), [`Jul 10th madrid_scene_s2_120_2019-7-10.tif`](https://github.com/CrmnCA/gds4eco/blob/main/data/madrid_scene_s2_120_2019-7-10.tif), [`Nov 27th madrid_scene_s2_120_2019-11-27.tif`](https://github.com/CrmnCA/gds4eco/blob/main/data/madrid_scene_s2_120_2019-11-27.tif))
+- Code used to generate the file [`[Page]`](https://github.com/CrmnCA/gds4eco/blob/main/data/madrid_s2.ipynb), borrowed from [here](https://github.com/darribas/gds4ae/blob/master/content/data/madrid_s2.ipynb)
 - Furhter information [`[URL]`](https://github.com/sentinel-hub/public-collections/tree/main/collections/sentinel-s2-l2a-mosaic-120)
 
-`<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"`{=html}<img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This dataset is licensed under a `<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"`{=html}Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+This dataset is licensed under a [license](https://creativecommons.org/publicdomain/zero/1.0/) CC0 1.0 Universal Public Domain Dedication.
 
 ### Sentinel 2 - 10m GHS composite
 
 This dataset contains a scene for the region of Madrid (Spain) extracted from the [GHS Composite S2](https://ghsl.jrc.ec.europa.eu/ghs_s2composite.php), by the European Commission.
 
--  Data file {download}`madrid_scene_s2_10_tc.tif`
-- Code used to generate the file [`[Page]`](madrid_s2)
+-  Data file [`madrid_scene_s2_10_tc.tif`](https://github.com/CrmnCA/gds4eco/blob/main/data/madrid_scene_s2_10_tc.tif)
+- Code used to generate the file [`[Page]`](https://github.com/CrmnCA/gds4eco/blob/main/data/madrid_s2.ipynb), borrowed from [here](https://github.com/darribas/gds4ae/blob/master/content/data/madrid_s2.ipynb)
 -  Furhter information [`[URL]`](https://ghsl.jrc.ec.europa.eu/ghs_s2composite.php)
 
-`<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"`{=html}<img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This dataset is licensed under a `<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"`{=html}Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+This dataset is licensed under a [license](https://creativecommons.org/publicdomain/zero/1.0/) CC0 1.0 Universal Public Domain Dedication.
 
 ## Cambodia
 
@@ -76,8 +76,8 @@ This dataset contains a scene for the region of Madrid (Spain) extracted from th
 
 Surface with $NO_2$ measurements (tropospheric column) information attached from Sentinel 5.
 
--  Data file {download}`cambodia_s5_no2.tif`
--  Code used to generate the file [`[Page]`](cambodia_pollution)
+-  Data file [`cambodia_s5_no2.tif`](https://github.com/CrmnCA/gds4eco/blob/main/data/cambodia_s5_no2.tif)
+-  Code used to generate the file [`[Page]`](https://github.com/CrmnCA/gds4eco/blob/main/data/cambodia_pollution.ipynb), borrowed from [here](https://github.com/darribas/gds4ae/blob/master/content/data/cambodia_pollution.ipynb)
 -  Furhter information [`[URL]`](https://github.com/Sentinel-5P/data-on-s3)
 
 ### Friction surfaces
@@ -87,9 +87,9 @@ This dataset is an extraction of the following two data products by Weiss et al.
 -   Global friction surface enumerating land-based travel walking-only speed without access to motorized transport for a nominal year 2019 (Minutes required to travel one metre)
 -   Global friction surface enumerating land-based travel speed with access to motorized transport for a nominal year 2019 (Minutes required to travel one metre)
 
-Each is provided on a separate file.
+Each is provided on a separate fie.
 
-- ️ Data files ({download}`Motorized <cambodia_2020_motorized_friction_surface.tif>` and {download}`Walking <cambodia_2020_walking_friction_surface.tif>`)
+- ️ Data files ([`cambodia_2020_motorized_friction_surface.tif`](https://github.com/CrmnCA/gds4eco/blob/main/data/cambodia_2020_motorized_friction_surface.tif) and [`cambodia_2020_walking_friction_surface.tif`](https://github.com/CrmnCA/gds4eco/blob/main/data/cambodia_2020_walking_friction_surface.tif))
 -  Code used to generate the file [`[Page]`](cambodia_road_friction)
 - ️ Furhter information [`[URL]`](https://malariaatlas.org)
 
@@ -99,17 +99,17 @@ This dataset relies on boundaries from the [Humanitarian Data Exchange](https://
 
 Pollution and friction aggregated at Level 2 (municipality) administrative boundaries for Cambodia.
 
-- Data file {download}`cambodia_regional.gpkg`
--  Code used to generate the file [`[Page]`](cambodia_regional)
+- Data file [`cambodia_regional.gpkg`](https://github.com/CrmnCA/gds4eco/blob/main/data/cambodia_regional.gpkg)
+- Code used to generate the file [`[Page]`](https://github.com/CrmnCA/gds4eco/blob/main/data/cambodia_regional.ipynb), borrowed from [here](https://github.com/darribas/gds4ae/blob/master/content/data/cambodia_regional.ipynb)
 
-`<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"`{=html}<img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This dataset is licensed under a `<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"`{=html}Creative Commons Attribution 4.0 International License</a>.
+This dataset is licensed under a [license](https://creativecommons.org/publicdomain/zero/1.0/) CC0 1.0 Universal Public Domain Dedication.
 
 ### Cambodian cities
 
 Extract from the Urban Centre Database (UCDB), version 1.2, of the centroid for Cambodian cities.
 
-- ️ Data file {download}`cambodian_cities.geojson`
--  Code used to generate the file [`[Page]`](cambodia_cities)
+- ️ Data file [`cambodian_cities.geojson`](https://github.com/CrmnCA/gds4eco/blob/main/data/cambodian_cities.geojson)
+-  Code used to generate the file [`[Page]`](https://github.com/CrmnCA/gds4eco/blob/main/data/cambodia_cities.ipynb), borrowed from [here](https://github.com/darribas/gds4ae/blob/master/content/data/cambodia_cities.ipynb)
 -  Furhter information [`[URL]`](https://ghsl.jrc.ec.europa.eu/ucdb2018visual.php)
 
-`<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"`{=html}<img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This dataset is licensed under a `<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"`{=html}Creative Commons Attribution 4.0 International License</a>.
+This dataset is licensed under a [license](https://creativecommons.org/publicdomain/zero/1.0/) CC0 1.0 Universal Public Domain Dedication.
