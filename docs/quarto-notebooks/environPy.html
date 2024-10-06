@@ -248,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#installation-of-miniconda" id="toc-installation-of-miniconda" class="nav-link" data-scroll-target="#installation-of-miniconda">Installation of Miniconda</a></li>
   <li><a href="#set-up-the-directories" id="toc-set-up-the-directories" class="nav-link" data-scroll-target="#set-up-the-directories">Set up the Directories</a></li>
   <li><a href="#set-up-the-python-environment" id="toc-set-up-the-python-environment" class="nav-link" data-scroll-target="#set-up-the-python-environment">Set up the Python Environment</a></li>
-  <li><a href="#start-a-lab-session" id="toc-start-a-lab-session" class="nav-link" data-scroll-target="#start-a-lab-session">Start a Lab Session</a></li>
+  <li><a href="#start-a-jupyter-notebook" id="toc-start-a-jupyter-notebook" class="nav-link" data-scroll-target="#start-a-jupyter-notebook">Start a jupyter notebook</a></li>
   </ul></li>
   <li><a href="#py-basics" id="toc-py-basics" class="nav-link" data-scroll-target="#py-basics">Py Basics</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
@@ -303,7 +303,7 @@ Note
 <li><p>Executing the Jupyter notebooks of the sessions of the course.</p></li>
 <li><p>Preparing your own Jupyter notebooks.</p></li>
 </ul>
-<p>To learn more about Jupyter notebooks, please visit <a href="Jupyter notebooks">this site</a>.</p>
+<p>To learn more about Jupyter notebooks, please visit <a href="https://jupyter.org/">this site</a>.</p>
 </section>
 <section id="set-up-python" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="set-up-python">Set up Python</h2>
@@ -318,14 +318,14 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="set-up-the-directories">Set up the Directories</h3>
 <ul>
 <li><p>Create a folder where you want to keep your work conducted throughout this course. For example, call it <code>gds4eco</code>. You can save it wherever you want, but remember to be tidy with your folder structure!</p></li>
-<li><p>Download the <a href="https://github.com/pietrostefani/gds/tree/main/data">data</a> to run and render the Jupyter notebooks. To learn how to download folders from github see the next section <span class="quarto-unresolved-ref">?sec-download</span>.</p></li>
+<li><p>Download the <a href="https://github.com/CrmnCA/gds4eco/tree/main/data">data</a> to run and render the Jupyter notebooks. To learn how to download folders from github see the next section named ‘Download data folders from GitHub’.</p></li>
 <li><p>Unzip the folders and store the nested folders into a subfolder named <code>data</code> within the folder <code>gds4eco</code>.</p></li>
-<li><p>Create another subfolder named <code>labs</code> within <code>gds4eco</code>.</p></li>
+<li><p>Create another subfolder named <code>jupyter-notebooks</code> within <code>gds4eco</code>, this is where you will store the Jupyter notebooks for each session.</p></li>
 </ul>
 <p>The folder structure should look like:</p>
 <pre><code>gds4eco/
 ├── data/
-└── labs/</code></pre>
+└── jupyter-notebooks/</code></pre>
 </section>
 <section id="set-up-the-python-environment" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="set-up-the-python-environment">Set up the Python Environment</h3>
@@ -334,87 +334,55 @@ Note
 <div class="tab-content" data-group="language">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <ul>
-<li><p>Download the <code>gds4eco.yml</code> from GitHub by cliciking <code>Download raw file</code>, top right <a href="https://github.com/pietrostefani/gds/blob/main/envs363-563.yml">at this page</a> <strong>MODIFY</strong>!</p></li>
+<li><p>Download the <code>gds4eco.yml</code> from GitHub by cliciking <code>Download raw file</code>, top right <a href="https://github.com/crmnca/gds4eco/blob/main/gds4eco.yml">at this page</a>.</p></li>
 <li><p>Save it in the folder <code>gds4eco</code> created before.</p></li>
 <li><p>Type in the search bar and find the <code>Anaconda Prompt (miniconda 3)</code> in your personal computer. Launch it. The terminal should appear.</p></li>
 </ul>
-<p><img src="./img/Step2_py.jpeg" width="60%"></p>
+<p><img src="../img/Step2_py.jpeg" width="60%"></p>
 <ul>
 <li>In the <strong>Anaconda Terminal</strong> write: <code>conda env create -n gds4eco --file M:\gds4eco\gds4eco.yml</code> and press <code>Enter</code>; if the file is located elsewhere you’ll need to use the corresponding file path.</li>
 <li>If you are prompted any questions, press <code>y</code>. This process will install all the packages necessary to carry out the lab sessions.</li>
 <li>In the <strong>Anaconda Terminal</strong> write <code>conda activate gds4eco</code> and press <code>Enter</code>. This activates your working environment.</li>
 </ul>
-<p><img src="./img/environ_Py_8.png" width="50%"></p>
-<p><img src="./img/Step3_py.PNG" width="80%"></p>
-<ul>
-<li><p>Configuration of Jupyter Notebooks:</p>
-<ul>
-<li><p>In the <strong>Anaconda Terminal</strong>, write <code>jupyter server --generate-config</code> and press enter. This, at least in Windows, should create a file to: <code>C:\Users\username\.jupyter\jupyter_server_config.py</code>.</p></li>
-<li><p>Open the file with a text editor (e.g.&nbsp;<a href="https://notepad-plus-plus.org">Notepad++</a>), do a <code>ctrl-f</code> search for: <code>c.ServerApp.root_dir</code>, uncomment it by removing the # and change it to <code>c.ServerApp.notebook_dir = 'M:\\your\\new\\path</code>, for example the directory where you created the <code>gds4eco</code> folder.</p></li>
-<li><p>Save the file and close it.</p></li>
-</ul></li>
-</ul>
-<p><img src="./img/Step4_py.PNG" width="80%"></p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <ul>
-<li><p>Download the <code>gds4eco.yml</code> from GitHub by clicking <code>Download raw file</code>, top right <a href="https://github.com/pietrostefani/gds/blob/main/envs363-563.yml">at this page</a>.</p></li>
-<li><p>Save it in the folder <code>envs363_563</code> created before.</p></li>
+<li><p>Download the <code>gds4eco.yml</code> from GitHub by clicking <code>Download raw file</code>, top right <a href="https://github.com/crmnca/gds4eco/blob/main/gds4eco.yml">at this page</a>.</p></li>
+<li><p>Save it in the folder <code>gds4eco</code> created before.</p></li>
 <li><p>Type in the search bar and open the <strong>Terminal</strong>.</p></li>
-<li><p>In the <strong>Terminal</strong> write <code>conda env create -n gds4eco --file gds4eco.yml</code> and press <code>Enter</code>. This will need to be modified according to where you placed the <code>gds4eco</code> folder. For example, Elisabetta has named her folder <code>gds4eco</code> and it’s in her Dropbox in <code>Users/PIETROST/Library/CloudStorage/Dropbox/envs363_563/envs363_563.yml</code>. If you created the <code>gds4eco</code> folder on your desktop, the path would be <code>Desktop/gds4eco</code>.</p></li>
+<li><p>In the <strong>Terminal</strong> write <code>conda env create -n gds4eco --file gds4eco.yml</code> and press <code>Enter</code>. This will need to be modified according to where you placed the <code>gds4eco</code> folder. For example, Carmen has named her folder <code>gds4eco</code> and it’s in her Documents folder, so intead of <code>gds4eco.yml</code>, she will write <code>Users/carmen/Documents/gds4eco/gds4eco.yml</code>. If Carmen had created the <code>gds4eco</code> folder on your desktop, the path would be <code>Users/carmen/Desktop/gds4eco/gds4eco.yml</code>, and so on.</p></li>
+<li><p>If you are prompted any questions, press <code>y</code>. This process will install all the packages necessary to carry out the lab sessions.</p></li>
 </ul>
-<p><img src="./img/environ_Py_6.png" width="100%"></p>
-<ul>
-<li>If you are prompted any questions, press <code>y</code>. This process will install all the packages necessary to carry out the lab sessions.</li>
-<li>You should then see this</li>
-</ul>
-<p><img src="./img/environ_Py_8.png" width="50%"></p>
 </div>
 </div>
 </div>
 </section>
-<section id="start-a-lab-session" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="start-a-lab-session">Start a Lab Session</h3>
+<section id="start-a-jupyter-notebook" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="start-a-jupyter-notebook">Start a jupyter notebook</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">MS Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Mac</a></li></ul>
 <div class="tab-content" data-group="language">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <ul>
-<li>Download the Jupyter Notebook of the session in your folder. Choose one Jupyter notebook and click <code>Dowload raw file</code> as shown below.</li>
-</ul>
-<p><img src="./img/Step5_py.PNG" width="80%"></p>
-<ul>
-<li>Save the file in the <code>labs</code> folder within your <code>geo4eco</code> folder on your machine.</li>
-<li>Type in the search bar, find and open the <code>Anaconda Prompt (miniconda 3)</code>.</li>
-<li>In the <strong>Anaconda Terminal</strong> write and run <code>conda activate geo4eco</code>.</li>
-<li>In the <strong>Anaconda Terminal</strong> write and run <code>jupyter notebook</code>. This should open Jupyter Notebook in your default browser.</li>
-</ul>
-<p><img src="./img/Step6_py.PNG" width="80%"></p>
-<ul>
-<li>Navigate to your course folder in and double click on the notebook downloaded in step 1.</li>
-<li>You can now work on your copy of the notebook.</li>
+<li><p>Download the Jupyter Notebook of the session from <a href="https://github.com/CrmnCA/gds4eco/tree/main/jupyter-notebooks">GitHub</a>.</p></li>
+<li><p>Save the file in the <code>jupyter-noteooks</code> folder within your <code>geo4eco</code> folder on your machine.</p></li>
+<li><p>Type in the search bar, find and open the <code>Anaconda Prompt (miniconda 3)</code>.</p></li>
+<li><p>In the <strong>Anaconda Terminal</strong> write and run <code>conda activate geo4eco</code>.</p></li>
+<li><p>In the <strong>Anaconda Terminal</strong> write and run <code>jupyter notebook</code>. This should open Jupyter Notebook in your default browser.</p></li>
+<li><p>Navigate to your course folder and double click on the notebook that you downloaded.</p></li>
+<li><p>You can now work on your own copy of the notebook.</p></li>
 </ul>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <ul>
-<li>Download the Jupyter Notebook of the session in your folder. Choose one jupyter notebook and click <code>Dowload raw file</code> as shown below</li>
+<li><p>Download the Jupyter Notebook of the session from <a href="https://github.com/CrmnCA/gds4eco/tree/main/jupyter-notebooks">GitHub</a></p></li>
+<li><p>Save the file in the <code>jupyter-notebooks</code> folder within your <code>gds4eco</code> folder on your machine.</p></li>
+<li><p>Type in the search bar, find and open the <strong>Terminal</strong>.</p></li>
+<li><p>In the <strong>Terminal</strong> write and run <code>conda activate gds4eco</code>.</p></li>
+<li><p>In the <strong>Terminal</strong> write and run <code>jupyter notebook</code>.</p></li>
+<li><p>This should open Jupyter Notebook in your default browser.</p></li>
+<li><p>Navigate to your folder. You can now work on your copy of the notebook.</p></li>
 </ul>
-<p><img src="./img/environ_Py_11.png" width="80%"></p>
-<ul>
-<li>Save the file in the <code>labs</code> folder within your <code>envs363</code> folder on your machine.</li>
-<li>Type in the search bar, find and open the <strong>Terminal</strong>.</li>
-<li>In the <strong>Terminal</strong> write and run <code>conda activate envs363</code>.</li>
-<li>In the <strong>Terminal</strong> write and run <code>jupyter notebook</code>.</li>
-</ul>
-<p><img src="./img/environ_Py_7.png" width="90%"></p>
-<ul>
-<li>This should open Jupyter Notebook in your default browser. You should see something like this:</li>
-</ul>
-<p><img src="./img/environ_Py_9.png" width="80%"></p>
-<ul>
-<li>Navigate to your folder. You can now work on your copy of the notebook.</li>
-</ul>
-<p><img src="./img/environ_Py_10.png" width="80%"></p>
 </div>
 </div>
 </div>
@@ -430,6 +398,7 @@ Note
 <ol type="1">
 <li><p><a href="https://geographicdata.science/book/intro.html">Geographic Data Science with Python</a>.</p></li>
 <li><p><a href="https://pythongis.org/index.html">Python for Geographic Data Analysis</a></p></li>
+<li><p><a href="https://pietrostefani.github.io/gds/">A course in Geographic Data Science, with R and Python</a>.</p></li>
 </ol>
 
 
