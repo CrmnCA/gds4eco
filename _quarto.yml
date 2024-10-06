@@ -17,8 +17,8 @@ book:
       chapters:
         - spatial-data.qmd
         - geovisualisation.qmd
-        # - spatial-feature-i.qmd
-        # - spatial-feature-ii.qmd
+        - spatial-feature-i.qmd
+        - spatial-feature-ii.qmd
         # - openstreetmap.qmd
         # - transport-costs.qmd
         # - web-mapping.qmd
