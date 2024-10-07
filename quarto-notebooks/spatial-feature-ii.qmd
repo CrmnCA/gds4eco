@@ -181,7 +181,7 @@ fig, ax = plt.subplots()
 db.to_crs(
     epsg=3857
 ).plot(
-    markersize=0.1, color="lime"
+    markersize=0.1, color="lime", ax=ax
 )
 boundaries.to_crs(
     epsg=3857
@@ -240,7 +240,7 @@ abb_hex["count"] = abb_hex["count"].fillna(0)
 
 fig, ax = plt.subplots()
 
-abb_hex.plot("count", scheme="fisherjenks")
+abb_hex.plot("count", scheme="fisherjenks", ax=ax)
 
 plt.show()
 ```
@@ -280,6 +280,5 @@ lisa.q * (lisa.p_sim < 0.01)
 
 If you want a bit more background into some of the techniques reviewed in this block, the following might be of interest:
 
--   [This block](http://darribas.org/gds_course/content/bE/concepts_E.html) of the GDS Course {cite}`darribas_gds_course` will introduce you to more techniques like the LISAs seen above to explore the spatial dimension of the statistical properties of your data. If you want a more detailed read, [this Chapter](https://geographicdata.science/book/notebooks/04_spatial_weights.html) of the GDS Book {cite}`reyABwolf` will do just that.
--   [This block](http://darribas.org/gds_course/content/bF/concepts_F.html) of the GDS Course {cite}`darribas_gds_course` will introduce you to more techniques like the LISAs seen above to explore the spatial dimension of the statistical properties of your data. If you want a more detailed read, [this Chapter](https://geographicdata.science/book/notebooks/07_local_autocorrelation.html) of the GDS Book {cite}`reyABwolf` will do just that.
--   [This block](http://darribas.org/gds_course/content/bH/concepts_H.html) of the GDS Course {cite}`darribas_gds_course` will introduce you to more techniques for exploring point patterns. If you want a more comprehensive read, [this Chapter](https://geographicdata.science/book/notebooks/08_point_pattern_analysis.html) of the GDS Book {cite}`reyABwolf` will do just that.
+-   [This block](https://pietrostefani.github.io/gds/clustering.html) of the GDS Course [@courseGDS-pietrostefani-cabrera] will introduce you to more techniques like the LISAs seen above to explore the spatial dimension of the statistical properties of your data. If you want a more detailed read, [this Chapter](https://geographicdata.science/book/notebooks/04_spatial_weights.html) of the GDS Book [@reyABwolf] will do just that.
+-   [This block](https://pietrostefani.github.io/gds/points.html) of the GDS Course [@courseGDS-pietrostefani-cabrera] will introduce you to more techniques for exploring point patterns. If you want a more comprehensive read, [this Chapter](https://geographicdata.science/book/notebooks/08_point_pattern_analysis.html) of the GDS Book [@reyABwolf] will do just that.

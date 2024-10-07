@@ -307,10 +307,9 @@ To visualise it, there are several plotting options:
 For example:
 
 ```{python}
-fig, ax = plt.subplots()
-
+#| warning: false
 ox.plot_figure_ground(centro_gr)
-
+plt.show()
 ```
 
 ```{python}
@@ -319,13 +318,13 @@ ox.graph_to_gdfs(centro_gr, nodes=False).explore()
 
 ::: callout-note
 **Challenge:** *How many bookshops are within a 50m radious of the Paseo de la Castellana?*
-:::
 
-Bonus tip: this one involves the following steps:
+This one involves the following steps:
 
 -   Extracting the street segment for Paseo de la Castellana
 -   Drawing a 50m buffer around it
--   Querying OSM for bookshops \`\`\`
+-   Querying OSM for bookshops
+:::
 
 ## Next steps
 

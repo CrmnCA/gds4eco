@@ -247,9 +247,9 @@ plt.show()
 
 For a "safe" choice, make sure to visit [ColorBrewer](https://colorbrewer2.org/)
 
--   [<img src="./img/l04_pal_qual.png" alt="Qualitative" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/wesanderson/#fantasticfox2_5) **Categories**, non-ordered
--   [<img src="./img/l04_pal_seq.png" alt="Sequential" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/colorbrewer/sequential/#rdpu_5) Graduated, **sequential**
--   [<img src="./img/l04_pal_div.png" alt="Divergent" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/colorbrewer/diverging/#rdylgn_5) Graduated, **divergent**
+-   [<img src="../img/l04_pal_qual.png" alt="Qualitative" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/wesanderson/#fantasticfox2_5) **Categories**, non-ordered
+-   [<img src="../img/l04_pal_seq.png" alt="Sequential" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/colorbrewer/sequential/#rdpu_5) Graduated, **sequential**
+-   [<img src="../img/l04_pal_div.png" alt="Divergent" class="fragment" style="width:300px;height:50px;vertical-align:middle;border:0px;"/>](https://jiffyclub.github.io/palettable/colorbrewer/diverging/#rdylgn_5) Graduated, **divergent**
 
 ### Choropleths on Geo-Tables
 
@@ -333,7 +333,7 @@ See [here](https://github.com/pysal/splot/blob/main/notebooks/mapping_vba.ipynb)
 Legendgrams are a way to more closely connect the statistical characteristics of your data to the map display.
 
 ::: callout-warning
-Legendgram are in an *experimental* development stage, so the code is a bit more involved and less stable. Use at your own risk!
+`Legendgram` is in an *experimental* development stage, so the code is a bit more involved and less stable. Use at your own risk!
 :::
 
 Here is an example:
@@ -370,13 +370,13 @@ plt.show()
 Assuming you have the file locally on the path `../data/`:
 
 ```{python}
-grid = xarray.open_rasterio(
-    "../data/cambodia_s5_no2.tif"
-).sel(band=1)
+grid = rioxarray.open_rasterio(
+  "../data/cambodia_s5_no2.tif"
+  ).sel(band=1)
 ```
 
 ```{python}
-grid = rioxarray.open_rasterio("../data/cambodia_s5_no2.tif").sel(band=1)
+grid_masked = grid.where(grid != grid.rio.nodata)
 ```
 
 -   Implicit continuous equal interval
