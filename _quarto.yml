@@ -32,11 +32,11 @@ book:
       Geographic Data Science for Applied Economists by Carmen Cabrera-Arnau.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
-  site-url:  https://pietrostefani.github.io/wma
-  repo-url: https://github.com/pietrostefani/gds
+  site-url:  https://crmnca.github.io/gds4eco/
+  repo-url: https://github.com/CrmnCA/gds4eco
   repo-actions: [edit]
   sharing: [twitter, facebook]
-  cover-image: density_africa.jpg
+  cover-image: cover-image.jpeg
   cover-image-alt: |
     Alternative text describing the book cover
  

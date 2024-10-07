@@ -1,18 +1,17 @@
 # Welcome {.unnumbered}
 
-This is the website for the "Geographic Data Science" module **ENVS363/563** at the University of Liverpool. This is course designed and delivered by Dr. Elisabetta Pietrostefani and Dr. Carmen Cabrera-Arnau from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. Much of the course material is inspired by Dani Arribas-Bel's [course on Geographic Data Science](https://darribas.org/gds_course/content/home.html).
+<div style="margin-top: 40px; margin-bottom: 120px;"> This is the website for the "Geographic Data Science for applied economists using Python". This module is delivered by Dr. Carmen Cabrera-Arnau from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. The course material has been designed by [Prof. Dani Arribas-Bel](https://darribas.org/), [Prof. Diego Puga](https://diegopuga.org/) and [Dr. Carmen Cabrera-Arnau](https://cabrera-arnau.com/).</div>
 
-This module will introduce students to the field of **Geographic Data Science (GDS)**, a discipline established at the intersection between Geographic Information Science (GIS) and Data Science. The course covers how the modern GIS toolkit can be integrated with Data Science tools to solve practical real-world problems.
+<!-- ::: callout-note -->
+<!-- A PDF version of this course is available for download [**`here`**](https://darribas.org/gds4ae/_downloads/d0630a09ef7a1acb4f456884eb623a49/gds4ae.pdf)**`.`** -->
+<!-- ::: -->
 
-Core to the set of employable skills to be taught in this course is an introduction to programming tools. Students will be able to whether to develop their skills in either R or Python in Lab sessions.
+# Contact {.unnumbered}
 
-The website is **free to use** and is licensed under the [Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). A compilation of this web course is hosted as a GitHub repository that you can access:
+<div style="margin-top: 40px">
+</div>
+> Carmen Cabrera-Arnau - c.cabrera-arnau \[at\] liverpool.ac.uk - Lecturer in Geographic Data Science - Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, UK.
 
--   As an [html website](https://pietrostefani.github.io/gds/).
--   As a [GitHub repository](https://github.com/pietrostefani/gds).
+> Dani Arribas-Bel - D.Arribas-Bel \[at\] liverpool.ac.uk - Professor in Geographic Data Science - Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, UK.
 
-## Contact {.unnumbered}
-
-> Elisabetta Pietrostefani - Module Leader - e.pietrostefani \[at\] liverpool.ac.uk Lecturer in Geographic Data Science, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom.
-
-> Carmen Cabrera-Arnau - c.cabrera-arnau \[at\] liverpool.ac.uk Lecturer in Geographic Data Science, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom.
+> Diego Puga - diego.puga \[at\] cemfi.es - Professor - CEMFI, Casado del Alisal 5, 28014 Madrid, Spain.
