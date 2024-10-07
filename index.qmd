@@ -5,7 +5,7 @@ This is the website for the "Geographic Data Science for applied economists usin
 :::
 
 ::: callout-note
-A PDF version of this course is available for download [here](https://github.com/CrmnCA/gds4eco/blob/main/Geographic-Data-Science-for-Applied-Economists.pdf).
+A PDF version of this course is available for download [here](https://github.com/CrmnCA/gds4eco/blob/main/gds4eco.pdf).
 :::
 
 # Contact {.unnumbered}

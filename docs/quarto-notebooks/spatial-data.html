@@ -333,10 +333,10 @@ div.csl-indent {
 
 <p>This block is all about understanding spatial data, both conceptually and practically. Before your fingers get on the keyboard, the following readings will help you get going and familiar with core ideas:</p>
 <ul>
-<li><p><a href="https://geographicdata.science/book/notebooks/01_geo_thinking.html">Chapter 1</a> of the GDS Book <span class="citation" data-cites="reyABwolf">(<a href="#ref-reyABwolf" role="doc-biblioref">Rey, Arribas-Bel, and Wolf forthcoming</a>)</span>, which provides a conceptual overview of representing Geography in data.</p></li>
-<li><p><a href="https://geographicdata.science/book/notebooks/03_spatial_data.html">Chapter 3</a> of the GDS Book <span class="citation" data-cites="reyABwolf">(<a href="#ref-reyABwolf" role="doc-biblioref">Rey, Arribas-Bel, and Wolf forthcoming</a>)</span>, a sister chapter with a more applied perspective on how concepts are implemented in computer data structures.</p></li>
+<li><p><a href="https://geographicdata.science/book/notebooks/01_geo_thinking.html">Chapter 1</a> of the GDS Book <span class="citation" data-cites="reyABwolf">(<a href="references.html#ref-reyABwolf" role="doc-biblioref">Rey, Arribas-Bel, and Wolf forthcoming</a>)</span>, which provides a conceptual overview of representing Geography in data.</p></li>
+<li><p><a href="https://geographicdata.science/book/notebooks/03_spatial_data.html">Chapter 3</a> of the GDS Book <span class="citation" data-cites="reyABwolf">(<a href="references.html#ref-reyABwolf" role="doc-biblioref">Rey, Arribas-Bel, and Wolf forthcoming</a>)</span>, a sister chapter with a more applied perspective on how concepts are implemented in computer data structures.</p></li>
 </ul>
-<p>Additionally, parts of this block are based and sourced from Chapters 2, 3 and 4 from the on-line course “A course in Geographic Data Science”, by Dr Elisabetta Pietrostefani and Dr Carmen Cabrera-Arnau <span class="citation" data-cites="courseGDS-pietrostefani-cabrera">(<a href="#ref-courseGDS-pietrostefani-cabrera" role="doc-biblioref">Pietrostefani and Cabrera-Arnau 2024</a>)</span>. This course also provides code in R.</p>
+<p>Additionally, parts of this block are based and sourced from Chapters 2, 3 and 4 from the on-line course “A course in Geographic Data Science”, by Dr Elisabetta Pietrostefani and Dr Carmen Cabrera-Arnau <span class="citation" data-cites="courseGDS-pietrostefani-cabrera">(<a href="references.html#ref-courseGDS-pietrostefani-cabrera" role="doc-biblioref">Pietrostefani and Cabrera-Arnau 2024</a>)</span>. This course also provides code in R.</p>
 <section id="packages-and-modules" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="packages-and-modules"><span class="header-section-number">1.1</span> Packages and modules</h2>
 <div class="cell" data-execution_count="1">
@@ -2511,13 +2511,13 @@ dtype: float64</code></pre>
 <h2 data-number="1.6" class="anchored" data-anchor-id="next-steps"><span class="header-section-number">1.6</span> Next steps</h2>
 <p>If you are interested in following up on some of the topics explored in this block, the following pointers might be useful:</p>
 <ul>
-<li>Although we have seen here <code>geopandas</code> only, all non-geographic operations on geo-tables are really thanks to <code>pandas</code>, the workhorse for tabular data in Python. Their <a href="https://pandas.pydata.org/docs/">official documentation</a> is an excellent first stop. If you prefer a book, <span class="citation" data-cites="McKinney2013Python">(<a href="#ref-McKinney2013Python" role="doc-biblioref">McKinney 2013</a>)</span> is a great one.</li>
+<li>Although we have seen here <code>geopandas</code> only, all non-geographic operations on geo-tables are really thanks to <code>pandas</code>, the workhorse for tabular data in Python. Their <a href="https://pandas.pydata.org/docs/">official documentation</a> is an excellent first stop. If you prefer a book, <span class="citation" data-cites="McKinney2013Python">(<a href="references.html#ref-McKinney2013Python" role="doc-biblioref">McKinney 2013</a>)</span> is a great one.</li>
 <li>For more detail on geographic operations on geo-tables, the <a href="https://geopandas.org/">Geopandas official documentation</a> is a great place to continue the journey.</li>
 <li>Surfaces, as covered here, are really an example of multi-dimensional labelled arrays. The library we use, <code>xarray</code> represents the cutting edge for working with these data structures in Python, and <a href="https://xarray.pydata.org/">their documentation</a> is a great place to wrap your head around how data of this type can be manipulated. For geographic extensions (CRS handling, reprojections, etc.), we have used <code>rioxarray</code> under the hood, and <a href="https://corteva.github.io/rioxarray/">its documentation</a> is also well worth checking.</li>
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-McKinney2013Python" class="csl-entry" role="listitem">
 McKinney, Wes. 2013. <em>Python for Data Analysis: Data Wrangling with Pandas, <span>NumPy</span>, and <span>IPython</span></em>. 1st ed. Paperback; O’Reilly Media. <a href="http://www.amazon.com/exec/obidos/redirect?tag=citeulike07-20\&amp;path=ASIN/1449319793">http://www.amazon.com/exec/obidos/redirect?tag=citeulike07-20\&amp;path=ASIN/1449319793</a>.
 </div>
