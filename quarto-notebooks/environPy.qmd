@@ -71,7 +71,6 @@ gds4eco/
 -   If you are prompted any questions, press `y`. This process will install all the packages necessary to carry out the lab sessions.
 -   In the **Anaconda Terminal** write `conda activate gds4eco` and press `Enter`. This activates your working environment.
 
-
 ## Mac
 
 -   Download the `gds4eco.yml` from GitHub by clicking `Download raw file`, top right [at this page](https://github.com/crmnca/gds4eco/blob/main/gds4eco.yml).
@@ -83,8 +82,6 @@ gds4eco/
 -   In the **Terminal** write `conda env create -n gds4eco --file gds4eco.yml` and press `Enter`. This will need to be modified according to where you placed the `gds4eco` folder. For example, Carmen has named her folder `gds4eco` and it's in her Documents folder, so intead of `gds4eco.yml`, she will write `Users/carmen/Documents/gds4eco/gds4eco.yml`. If Carmen had created the `gds4eco` folder on your desktop, the path would be `Users/carmen/Desktop/gds4eco/gds4eco.yml`, and so on.
 
 -   If you are prompted any questions, press `y`. This process will install all the packages necessary to carry out the lab sessions.
-
-
 :::
 
 ### Start a jupyter notebook {.unnumbered}
@@ -92,7 +89,7 @@ gds4eco/
 ::: {.panel-tabset group="language"}
 ## MS Windows
 
--   Download the Jupyter Notebook of the session from [GitHub](https://github.com/CrmnCA/gds4eco/tree/main/jupyter-notebooks). 
+-   Download the Jupyter Notebook of the session from [GitHub](https://github.com/CrmnCA/gds4eco/tree/main/jupyter-notebooks).
 
 -   Save the file in the `jupyter-noteooks` folder within your `geo4eco` folder on your machine.
 
@@ -108,8 +105,7 @@ gds4eco/
 
 ## Mac
 
--   Download the Jupyter Notebook of the session from [GitHub](https://github.com/CrmnCA/gds4eco/tree/main/jupyter-notebooks) 
-
+-   Download the Jupyter Notebook of the session from [GitHub](https://github.com/CrmnCA/gds4eco/tree/main/jupyter-notebooks)
 
 -   Save the file in the `jupyter-notebooks` folder within your `gds4eco` folder on your machine.
 

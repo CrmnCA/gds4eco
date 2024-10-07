@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://crmnca.github.io/gds4eco/index.html</loc>
-    <lastmod>2024-10-07T11:28:45.925Z</lastmod>
+    <lastmod>2024-10-07T12:02:13.615Z</lastmod>
   </url>
   <url>
     <loc>https://crmnca.github.io/gds4eco/quarto-notebooks/transport-costs.html</loc>
@@ -23,5 +23,9 @@
   <url>
     <loc>https://crmnca.github.io/gds4eco/quarto-notebooks/download.html</loc>
     <lastmod>2024-10-07T11:29:44.959Z</lastmod>
+  </url>
+  <url>
+    <loc>https://crmnca.github.io/gds4eco/quarto-notebooks/environPy.html</loc>
+    <lastmod>2024-10-07T12:02:14.255Z</lastmod>
   </url>
 </urlset>
