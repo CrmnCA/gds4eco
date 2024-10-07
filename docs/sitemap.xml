@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://crmnca.github.io/gds4eco/quarto-notebooks/spatial-feature-i.html</loc>
-    <lastmod>2024-10-07T13:41:23.125Z</lastmod>
+    <lastmod>2024-10-07T13:48:25.175Z</lastmod>
   </url>
   <url>
     <loc>https://crmnca.github.io/gds4eco/quarto-notebooks/overview.html</loc>
@@ -35,5 +35,9 @@
   <url>
     <loc>https://crmnca.github.io/gds4eco/quarto-notebooks/geovisualisation.html</loc>
     <lastmod>2024-10-07T13:41:27.898Z</lastmod>
+  </url>
+  <url>
+    <loc>https://crmnca.github.io/gds4eco/index.html</loc>
+    <lastmod>2024-10-07T13:48:28.163Z</lastmod>
   </url>
 </urlset>

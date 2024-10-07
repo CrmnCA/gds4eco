@@ -278,5 +278,12 @@
     "title": "2  Geovisualisation",
     "section": "2.4 Next steps",
     "text": "2.4 Next steps\nIf you are interested in statistical maps based on classification, here are two recommendations to check out next:\n\nOn the technical side, the documentation for mapclassify (including its tutorials) provides more detail and illustrates more classification algorithms than those reviewed in this block.\nOn a more conceptual note, Cynthia Brewer’s “Designing better maps” (Brewer 2015) is an excellent blueprint for good map making.\n\n\n\n\n\nArribas-Bel, Dani. 2019. “A Course on Geographic Data Science.” The Journal of Open Source Education 2 (14). https://doi.org/https://doi.org/10.21105/jose.00042.\n\n\nBrewer, Cynthia. 2015. Designing Better Maps: A Guide for GIS Users. ESRI press.\n\n\nPietrostefani, Elisabetta, and Carmen Cabrera-Arnau. 2024. “A Course in Geographic Data Science.” https://pietrostefani.github.io/gds/.\n\n\nRey, Sergio J., Daniel Arribas-Bel, and Levi J. Wolf. forthcoming. Geographic Data Science with PySAL and the PyData Stack. CRC press."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Geographic Data Science for Applied Economists",
+    "section": "",
+    "text": "Welcome\n\nThis is the website for the “Geographic Data Science for applied economists using Python”. This module is delivered by Dr. Carmen Cabrera-Arnau from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. The course material has been designed by Prof. Dani Arribas-Bel, Prof. Diego Puga and Dr. Carmen Cabrera-Arnau.\n\n\n\n\n\n\n\nNote\n\n\n\nA PDF version of this course is available for download here.\n\n\n\n\nContact\n\n\n\n\nCarmen Cabrera-Arnau - c.cabrera-arnau [at] liverpool.ac.uk - Lecturer in Geographic Data Science - Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, UK.\n\n\nDani Arribas-Bel - D.Arribas-Bel [at] liverpool.ac.uk - Professor in Geographic Data Science - Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, UK.\n\n\nDiego Puga - diego.puga [at] cemfi.es - Professor - CEMFI, Casado del Alisal 5, 28014 Madrid, Spain."
   }
 ]
