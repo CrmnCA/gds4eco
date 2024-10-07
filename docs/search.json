@@ -82,5 +82,19 @@
     "title": "References",
     "section": "",
     "text": "Arribas-Bel, Dani. 2019. “A Course on Geographic Data\nScience.” The Journal of Open Source Education 2 (14).\nhttps://doi.org/https://doi.org/10.21105/jose.00042.\n\n\nBrewer, Cynthia. 2015. Designing Better Maps: A Guide for GIS\nUsers. ESRI press.\n\n\nMcKinney, Wes. 2013. Python for Data Analysis: Data Wrangling with\nPandas, NumPy, and IPython. 1st ed.\nPaperback; O’Reilly Media. http://www.amazon.com/exec/obidos/redirect?tag=citeulike07-20\\&path=ASIN/1449319793.\n\n\nPietrostefani, Elisabetta, and Carmen Cabrera-Arnau. 2024.\n“A Course in Geographic\nData Science.” https://pietrostefani.github.io/gds/.\n\n\nRey, Sergio J., Daniel Arribas-Bel, and Levi J. Wolf. forthcoming.\nGeographic Data Science with PySAL and the PyData Stack. CRC\npress."
+  },
+  {
+    "objectID": "quarto-notebooks/overview.html#aims",
+    "href": "quarto-notebooks/overview.html#aims",
+    "title": "Overview",
+    "section": "Aims",
+    "text": "Aims\nThe course has three primary aims:\n\nEquip students with essential skills in Geographic Data Science (GDS), improving their statistical and numerical understanding and familiarity with fundamental programming concepts and modern computational tools for GDS;\nOffer a thorough overview of key methodologies used by Geographic Data Scientists, along with insights on how and when to apply them;\nEmphasise practical applications of these techniques within real-world geographical and applied settings."
+  },
+  {
+    "objectID": "quarto-notebooks/overview.html#learning-outcomes",
+    "href": "quarto-notebooks/overview.html#learning-outcomes",
+    "title": "Overview",
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\nBy the end of this course, students will be able to:\n\nIllustrate advanced techniques in GIS/GDS and use them programmatically for importing, manipulating, and analysing data in various formats.\nExplain the rationale and mechanics behind key methodological approaches in GDS, both from analytical and visual perspectives.\nAssess the suitability of specific techniques, their capabilities, and how they can address relevant questions.\nImplement various spatial analysis methods and interpret the outcomes, transforming raw data into meaningful insights.\nIndependently handle new datasets using GIS/GDS tools in a programmatic manner.\nDemonstrate a sound understanding of how real-world (geo)data are produced, their potential insights and biases, as well as opportunities and limitations."
   }
 ]

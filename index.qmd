@@ -3,7 +3,7 @@
 <div style="margin-top: 40px; margin-bottom: 120px;"> This is the website for the "Geographic Data Science for applied economists using Python". This module is delivered by Dr. Carmen Cabrera-Arnau from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. The course material has been designed by [Prof. Dani Arribas-Bel](https://darribas.org/), [Prof. Diego Puga](https://diegopuga.org/) and [Dr. Carmen Cabrera-Arnau](https://cabrera-arnau.com/).</div>
 
 ::: callout-note
-A PDF version of this course is available for download [here](https://https://github.com/CrmnCA/gds4eco/blob/main/Geographic-Data-Science-for-Applied-Economists.pdf).
+A PDF version of this course is available for download [here](https://github.com/CrmnCA/gds4eco/blob/main/Geographic-Data-Science-for-Applied-Economists.pdf).
 :::
 
 # Contact {.unnumbered}
