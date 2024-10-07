@@ -96,5 +96,12 @@
     "title": "Overview",
     "section": "Learning Outcomes",
     "text": "Learning Outcomes\nBy the end of this course, students will be able to:\n\nIllustrate advanced techniques in GIS/GDS and use them programmatically for importing, manipulating, and analysing data in various formats.\nExplain the rationale and mechanics behind key methodological approaches in GDS, both from analytical and visual perspectives.\nAssess the suitability of specific techniques, their capabilities, and how they can address relevant questions.\nImplement various spatial analysis methods and interpret the outcomes, transforming raw data into meaningful insights.\nIndependently handle new datasets using GIS/GDS tools in a programmatic manner.\nDemonstrate a sound understanding of how real-world (geo)data are produced, their potential insights and biases, as well as opportunities and limitations."
+  },
+  {
+    "objectID": "quarto-notebooks/download.html",
+    "href": "quarto-notebooks/download.html",
+    "title": "Download data folders from GitHub",
+    "section": "",
+    "text": "Go to https://download-directory.github.io\n\n\n\nGo to the folder you need for your Lab. For example copy: https://github.com/pietrostefani/gds/tree/main/data/London\n\n\n\nPaste it in the green box… give it a few minutes\nCheck your downloads file and unzip"
   }
 ]
