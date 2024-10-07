@@ -1397,44 +1397,28 @@
     "href": "quarto-notebooks/environPy.html#reproducing-code-in-this-course",
     "title": "Environment",
     "section": "Reproducing code in this course",
-    "text": "Reproducing code in this course\nTo run the analysis and reproduce the code in Python, you will need to set up your Python environment according to the following instructions. Please follow the instructions according to your operating system.\n\n\n\n\n\n\nNote\n\n\n\nEven if you have used Python before and have set up your own environment, we very much recommend following the set up described below to ensure you can run the code smoothly.\n\n\nFollow these instructions and test your installation prior to the first session of the course. Setting up the Python environment is necessary for:\n\nExecuting the Jupyter notebooks of the sessions of the course.\nPreparing your own Jupyter notebooks.\n\nTo learn more about Jupyter notebooks, please visit this site.",
-    "crumbs": [
-      "Introduction",
-      "Environment"
-    ]
+    "text": "Reproducing code in this course\nTo run the analysis and reproduce the code in Python, you will need to set up your Python environment according to the following instructions. Please follow the instructions according to your operating system.\n\n\n\n\n\n\nNote\n\n\n\nEven if you have used Python before and have set up your own environment, we very much recommend following the set up described below to ensure you can run the code smoothly.\n\n\nFollow these instructions and test your installation prior to the first session of the course. Setting up the Python environment is necessary for:\n\nExecuting the Jupyter notebooks of the sessions of the course.\nPreparing your own Jupyter notebooks.\n\nTo learn more about Jupyter notebooks, please visit this site."
   },
   {
     "objectID": "quarto-notebooks/environPy.html#set-up-python",
     "href": "quarto-notebooks/environPy.html#set-up-python",
     "title": "Environment",
     "section": "Set up Python",
-    "text": "Set up Python\n\nInstallation of Miniconda\n\nInstall Miniconda on your personal laptop: Follow the instructions here.\nDuring the installation, leave the default settings. In particular, when asked whom to “Install Miniconda for”, choose “Just for me”.\n\n\n\nSet up the Directories\n\nCreate a folder where you want to keep your work conducted throughout this course. For example, call it gds4eco. You can save it wherever you want, but remember to be tidy with your folder structure!\nDownload the data to run and render the Jupyter notebooks. To learn how to download folders from github see the next section named ‘Download data folders from GitHub’.\nUnzip the folders and store the nested folders into a subfolder named data within the folder gds4eco.\nCreate another subfolder named jupyter-notebooks within gds4eco, this is where you will store the Jupyter notebooks for each session.\n\nThe folder structure should look like:\ngds4eco/\n├── data/\n└── jupyter-notebooks/\n\n\nSet up the Python Environment\n\nMS WindowsMac\n\n\n\nDownload the gds4eco.yml from GitHub by cliciking Download raw file, top right at this page.\nSave it in the folder gds4eco created before.\nType in the search bar and find the Anaconda Prompt (miniconda 3) in your personal computer. Launch it. The terminal should appear.\n\n\n\nIn the Anaconda Terminal write: conda env create -n gds4eco --file M:\\gds4eco\\gds4eco.yml and press Enter; if the file is located elsewhere you’ll need to use the corresponding file path.\nIf you are prompted any questions, press y. This process will install all the packages necessary to carry out the lab sessions.\nIn the Anaconda Terminal write conda activate gds4eco and press Enter. This activates your working environment.\n\n\n\n\nDownload the gds4eco.yml from GitHub by clicking Download raw file, top right at this page.\nSave it in the folder gds4eco created before.\nType in the search bar and open the Terminal.\nIn the Terminal write conda env create -n gds4eco --file gds4eco.yml and press Enter. This will need to be modified according to where you placed the gds4eco folder. For example, Carmen has named her folder gds4eco and it’s in her Documents folder, so intead of gds4eco.yml, she will write Users/carmen/Documents/gds4eco/gds4eco.yml. If Carmen had created the gds4eco folder on your desktop, the path would be Users/carmen/Desktop/gds4eco/gds4eco.yml, and so on.\nIf you are prompted any questions, press y. This process will install all the packages necessary to carry out the lab sessions.\n\n\n\n\n\n\nStart a jupyter notebook\n\nMS WindowsMac\n\n\n\nDownload the Jupyter Notebook of the session from GitHub.\nSave the file in the jupyter-noteooks folder within your geo4eco folder on your machine.\nType in the search bar, find and open the Anaconda Prompt (miniconda 3).\nIn the Anaconda Terminal write and run conda activate geo4eco.\nIn the Anaconda Terminal write and run jupyter notebook. This should open Jupyter Notebook in your default browser.\nNavigate to your course folder and double click on the notebook that you downloaded.\nYou can now work on your own copy of the notebook.\n\n\n\n\nDownload the Jupyter Notebook of the session from GitHub\nSave the file in the jupyter-notebooks folder within your gds4eco folder on your machine.\nType in the search bar, find and open the Terminal.\nIn the Terminal write and run conda activate gds4eco.\nIn the Terminal write and run jupyter notebook.\nThis should open Jupyter Notebook in your default browser.\nNavigate to your folder. You can now work on your copy of the notebook.",
-    "crumbs": [
-      "Introduction",
-      "Environment"
-    ]
+    "text": "Set up Python\n\nInstallation of Miniconda\n\nInstall Miniconda on your personal laptop: Follow the instructions here.\nDuring the installation, leave the default settings. In particular, when asked whom to “Install Miniconda for”, choose “Just for me”.\n\n\n\nSet up the Directories\n\nCreate a folder where you want to keep your work conducted throughout this course. For example, call it gds4eco. You can save it wherever you want, but remember to be tidy with your folder structure!\nDownload the data to run and render the Jupyter notebooks. To learn how to download folders from github see the next section named ‘Download data folders from GitHub’.\nUnzip the folders and store the nested folders into a subfolder named data within the folder gds4eco.\nCreate another subfolder named jupyter-notebooks within gds4eco, this is where you will store the Jupyter notebooks for each session.\n\nThe folder structure should look like:\ngds4eco/\n├── data/\n└── jupyter-notebooks/\n\n\nSet up the Python Environment\n\nMS WindowsMac\n\n\n\nDownload the gds4eco.yml from GitHub by cliciking Download raw file, top right at this page.\nSave it in the folder gds4eco created before.\nType in the search bar and find the Anaconda Prompt (miniconda 3) in your personal computer. Launch it. The terminal should appear.\n\n\n\nIn the Anaconda Terminal write: conda env create -n gds4eco --file M:\\gds4eco\\gds4eco.yml and press Enter; if the file is located elsewhere you’ll need to use the corresponding file path.\nIf you are prompted any questions, press y. This process will install all the packages necessary to carry out the lab sessions.\nIn the Anaconda Terminal write conda activate gds4eco and press Enter. This activates your working environment.\n\n\n\n\nDownload the gds4eco.yml from GitHub by clicking Download raw file, top right at this page.\nSave it in the folder gds4eco created before.\nType in the search bar and open the Terminal.\nIn the Terminal write conda env create -n gds4eco --file gds4eco.yml and press Enter. This will need to be modified according to where you placed the gds4eco folder. For example, Carmen has named her folder gds4eco and it’s in her Documents folder, so intead of gds4eco.yml, she will write Users/carmen/Documents/gds4eco/gds4eco.yml. If Carmen had created the gds4eco folder on your desktop, the path would be Users/carmen/Desktop/gds4eco/gds4eco.yml, and so on.\nIf you are prompted any questions, press y. This process will install all the packages necessary to carry out the lab sessions.\n\n\n\n\n\n\nStart a jupyter notebook\n\nMS WindowsMac\n\n\n\nDownload the Jupyter Notebook of the session from GitHub.\nSave the file in the jupyter-noteooks folder within your geo4eco folder on your machine.\nType in the search bar, find and open the Anaconda Prompt (miniconda 3).\nIn the Anaconda Terminal write and run conda activate geo4eco.\nIn the Anaconda Terminal write and run jupyter notebook. This should open Jupyter Notebook in your default browser.\nNavigate to your course folder and double click on the notebook that you downloaded.\nYou can now work on your own copy of the notebook.\n\n\n\n\nDownload the Jupyter Notebook of the session from GitHub\nSave the file in the jupyter-notebooks folder within your gds4eco folder on your machine.\nType in the search bar, find and open the Terminal.\nIn the Terminal write and run conda activate gds4eco.\nIn the Terminal write and run jupyter notebook.\nThis should open Jupyter Notebook in your default browser.\nNavigate to your folder. You can now work on your copy of the notebook."
   },
   {
     "objectID": "quarto-notebooks/environPy.html#py-basics",
     "href": "quarto-notebooks/environPy.html#py-basics",
     "title": "Environment",
     "section": "Py Basics",
-    "text": "Py Basics\nPlease refer to the tutorials from learnpython.org for an introduction to coding in Python. We particularly recommend the tutorials listed under the “Learn the Basics” section.",
-    "crumbs": [
-      "Introduction",
-      "Environment"
-    ]
+    "text": "Py Basics\nPlease refer to the tutorials from learnpython.org for an introduction to coding in Python. We particularly recommend the tutorials listed under the “Learn the Basics” section."
   },
   {
     "objectID": "quarto-notebooks/environPy.html#resources",
     "href": "quarto-notebooks/environPy.html#resources",
     "title": "Environment",
     "section": "Resources",
-    "text": "Resources\nSome help along the way with:\n\nGeographic Data Science with Python.\nPython for Geographic Data Analysis\nA course in Geographic Data Science, with R and Python.",
-    "crumbs": [
-      "Introduction",
-      "Environment"
-    ]
+    "text": "Resources\nSome help along the way with:\n\nGeographic Data Science with Python.\nPython for Geographic Data Analysis.\nA course in Geographic Data Science, with R and Python."
   },
   {
     "objectID": "quarto-notebooks/datasets.html",
@@ -1513,5 +1497,12 @@
     "title": "5  OpenStreetMap",
     "section": "5.1 Packages and modules",
     "text": "5.1 Packages and modules\n\nimport geopandas\nimport contextily\nimport matplotlib.pyplot as plt\nfrom IPython.display import GeoJSON"
+  },
+  {
+    "objectID": "quarto-notebooks/environPy.html#coding-language",
+    "href": "quarto-notebooks/environPy.html#coding-language",
+    "title": "Environment",
+    "section": "Coding language",
+    "text": "Coding language\nThis course is primarily designed to introduce Geographic Data Science using Python as the core programming language. All course materials, assignments, and exercises are built with Python in mind, ensuring consistency and clarity throughout the learning process. Python was selected for its versatility, extensive libraries, and widespread use in the Geographic Data Science field, making it an excellent choice for both beginners and advanced users. If you are curious about conducting similar geospatial analyses in R, you can access additional resources here. However, for this course, all work should be completed in Python and following the environment setup that we introduce below."
   }
 ]

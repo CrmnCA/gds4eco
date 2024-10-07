@@ -1,4 +1,4 @@
-name: gds-python
+name: gds4eco
 channels:
   - defaults
 dependencies:
