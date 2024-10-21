@@ -102,35 +102,55 @@
     "href": "quarto-notebooks/environPy.html#reproducing-code-in-this-course",
     "title": "Environment",
     "section": "Reproducing code in this course",
-    "text": "Reproducing code in this course\nTo run the analysis and reproduce the code in Python, you will need to set up your Python environment according to the following instructions. Please follow the instructions according to your operating system.\n\n\n\n\n\n\nNote\n\n\n\nEven if you have used Python before and have set up your own environment, we very much recommend following the set up described below to ensure you can run the code smoothly.\n\n\nFollow these instructions and test your installation prior to the first session of the course. Setting up the Python environment is necessary for:\n\nExecuting the Jupyter notebooks of the sessions of the course.\nPreparing your own Jupyter notebooks.\n\nTo learn more about Jupyter notebooks, please visit this site."
+    "text": "Reproducing code in this course\nTo run the analysis and reproduce the code in Python, you will need to set up your Python environment according to the following instructions. Please follow the instructions according to your operating system.\n\n\n\n\n\n\nNote\n\n\n\nEven if you have used Python before and have set up your own environment, we very much recommend following the set up described below to ensure you can run the code smoothly.\n\n\nFollow these instructions and test your installation prior to the first session of the course. Setting up the Python environment is necessary for:\n\nExecuting the Jupyter notebooks of the sessions of the course.\nPreparing your own Jupyter notebooks.\n\nTo learn more about Jupyter notebooks, please visit this site.",
+    "crumbs": [
+      "Introduction",
+      "Environment"
+    ]
   },
   {
     "objectID": "quarto-notebooks/environPy.html#set-up-python",
     "href": "quarto-notebooks/environPy.html#set-up-python",
     "title": "Environment",
     "section": "Set up Python",
-    "text": "Set up Python\n\nInstallation of Miniconda\n\nInstall Miniconda on your personal laptop: Follow the instructions here.\nDuring the installation, leave the default settings. In particular, when asked whom to “Install Miniconda for”, choose “Just for me”.\n\n\n\nSet up the Directories\n\nCreate a folder where you want to keep your work conducted throughout this course. For example, call it gds4eco. You can save it wherever you want, but remember to be tidy with your folder structure!\nDownload the data to run and render the Jupyter notebooks. To learn how to download folders from github see the next section named ‘Download data folders from GitHub’.\nUnzip the folders and store the nested folders into a subfolder named data within the folder gds4eco.\nCreate another subfolder named jupyter-notebooks within gds4eco, this is where you will store the Jupyter notebooks for each session.\n\nThe folder structure should look like:\ngds4eco/\n├── data/\n└── jupyter-notebooks/\n\n\nSet up the Python Environment\n\nMS WindowsMac\n\n\n\nDownload the gds4eco.yml from GitHub by cliciking Download raw file, top right at this page.\nSave it in the folder gds4eco created before.\nType in the search bar and find the Anaconda Prompt (miniconda 3) in your personal computer. Launch it. The terminal should appear.\n\n\n\nIn the Anaconda Terminal write: conda env create -n gds4eco --file M:\\gds4eco\\gds4eco.yml and press Enter; if the file is located elsewhere you’ll need to use the corresponding file path.\nIf you are prompted any questions, press y. This process will install all the packages necessary to carry out the lab sessions.\nIn the Anaconda Terminal write conda activate gds4eco and press Enter. This activates your working environment.\n\n\n\n\nDownload the gds4eco.yml from GitHub by clicking Download raw file, top right at this page.\nSave it in the folder gds4eco created before.\nType in the search bar and open the Terminal.\nIn the Terminal write conda env create -n gds4eco --file gds4eco.yml and press Enter. This will need to be modified according to where you placed the gds4eco folder. For example, Carmen has named her folder gds4eco and it’s in her Documents folder, so intead of gds4eco.yml, she will write Users/carmen/Documents/gds4eco/gds4eco.yml. If Carmen had created the gds4eco folder on your desktop, the path would be Users/carmen/Desktop/gds4eco/gds4eco.yml, and so on.\nIf you are prompted any questions, press y. This process will install all the packages necessary to carry out the lab sessions.\n\n\n\n\n\n\nStart a jupyter notebook\n\nMS WindowsMac\n\n\n\nDownload the Jupyter Notebook of the session from GitHub.\nSave the file in the jupyter-noteooks folder within your geo4eco folder on your machine.\nType in the search bar, find and open the Anaconda Prompt (miniconda 3).\nIn the Anaconda Terminal write and run conda activate geo4eco.\nIn the Anaconda Terminal write and run jupyter notebook. This should open Jupyter Notebook in your default browser.\nNavigate to your course folder and double click on the notebook that you downloaded.\nYou can now work on your own copy of the notebook.\n\n\n\n\nDownload the Jupyter Notebook of the session from GitHub\nSave the file in the jupyter-notebooks folder within your gds4eco folder on your machine.\nType in the search bar, find and open the Terminal.\nIn the Terminal write and run conda activate gds4eco.\nIn the Terminal write and run jupyter notebook.\nThis should open Jupyter Notebook in your default browser.\nNavigate to your folder. You can now work on your copy of the notebook."
+    "text": "Set up Python\n\nInstallation of Miniconda\n\nInstall Miniconda on your personal laptop: Follow the instructions here.\nDuring the installation, leave the default settings. In particular, when asked whom to “Install Miniconda for”, choose “Just for me”.\n\n\n\nSet up the Directories\n\nCreate a folder where you want to keep your work conducted throughout this course. For example, call it gds4eco. You can save it wherever you want, but remember to be tidy with your folder structure!\nDownload the data to run and render the Jupyter notebooks. To learn how to download folders from github see the next section named ‘Download data folders from GitHub’.\nUnzip the folders and store the nested folders into a subfolder named data within the folder gds4eco.\nCreate another subfolder named jupyter-notebooks within gds4eco, this is where you will store the Jupyter notebooks for each session.\n\nThe folder structure should look like:\ngds4eco/\n├── data/\n└── jupyter-notebooks/\n\n\nSet up the Python Environment\n\nMS WindowsMac\n\n\n\nDownload the gds4eco.yml from GitHub by cliciking Download raw file, top right at this page.\nSave it in the folder gds4eco created before.\nType in the search bar and find the Anaconda Prompt (miniconda 3) in your personal computer. Launch it. The terminal should appear.\n\n\n\nIn the Anaconda Terminal write: conda env create -n gds4eco --file M:\\gds4eco\\gds4eco.yml and press Enter; if the file is located elsewhere you’ll need to use the corresponding file path.\nIf you are prompted any questions, press y. This process will install all the packages necessary to carry out the lab sessions.\nIn the Anaconda Terminal write conda activate gds4eco and press Enter. This activates your working environment.\n\n\n\n\nDownload the gds4eco.yml from GitHub by clicking Download raw file, top right at this page.\nSave it in the folder gds4eco created before.\nType in the search bar and open the Terminal.\nIn the Terminal write conda env create -n gds4eco --file gds4eco.yml and press Enter. This will need to be modified according to where you placed the gds4eco folder. For example, Carmen has named her folder gds4eco and it’s in her Documents folder, so intead of gds4eco.yml, she will write Users/carmen/Documents/gds4eco/gds4eco.yml. If Carmen had created the gds4eco folder on your desktop, the path would be Users/carmen/Desktop/gds4eco/gds4eco.yml, and so on.\nIf you are prompted any questions, press y. This process will install all the packages necessary to carry out the lab sessions.\n\n\n\n\n\n\nStart a jupyter notebook\n\nMS WindowsMac\n\n\n\nDownload the Jupyter Notebook of the session from GitHub.\nSave the file in the jupyter-noteooks folder within your geo4eco folder on your machine.\nType in the search bar, find and open the Anaconda Prompt (miniconda 3).\nIn the Anaconda Terminal write and run conda activate geo4eco.\nIn the Anaconda Terminal write and run jupyter notebook. This should open Jupyter Notebook in your default browser.\nNavigate to your course folder and double click on the notebook that you downloaded.\nYou can now work on your own copy of the notebook.\n\n\n\n\nDownload the Jupyter Notebook of the session from GitHub\nSave the file in the jupyter-notebooks folder within your gds4eco folder on your machine.\nType in the search bar, find and open the Terminal.\nIn the Terminal write and run conda activate gds4eco.\nIn the Terminal write and run jupyter notebook.\nThis should open Jupyter Notebook in your default browser.\nNavigate to your folder. You can now work on your copy of the notebook.",
+    "crumbs": [
+      "Introduction",
+      "Environment"
+    ]
   },
   {
     "objectID": "quarto-notebooks/environPy.html#py-basics",
     "href": "quarto-notebooks/environPy.html#py-basics",
     "title": "Environment",
     "section": "Py Basics",
-    "text": "Py Basics\nPlease refer to the tutorials from learnpython.org for an introduction to coding in Python. We particularly recommend the tutorials listed under the “Learn the Basics” section."
+    "text": "Py Basics\nPlease refer to the tutorials from learnpython.org for an introduction to coding in Python. We particularly recommend the tutorials listed under the “Learn the Basics” section.",
+    "crumbs": [
+      "Introduction",
+      "Environment"
+    ]
   },
   {
     "objectID": "quarto-notebooks/environPy.html#resources",
     "href": "quarto-notebooks/environPy.html#resources",
     "title": "Environment",
     "section": "Resources",
-    "text": "Resources\nSome help along the way with:\n\nGeographic Data Science with Python.\nPython for Geographic Data Analysis.\nA course in Geographic Data Science, with R and Python."
+    "text": "Resources\nSome help along the way with:\n\nGeographic Data Science with Python.\nPython for Geographic Data Analysis.\nA course in Geographic Data Science, with R and Python.",
+    "crumbs": [
+      "Introduction",
+      "Environment"
+    ]
   },
   {
     "objectID": "quarto-notebooks/download.html",
     "href": "quarto-notebooks/download.html",
     "title": "Download data folders from GitHub",
     "section": "",
-    "text": "Go to https://download-directory.github.io\n\n\n\nGo to the folder you need for your Lab. For example copy: https://github.com/pietrostefani/gds/tree/main/data/London\n\n\n\nPaste it in the green box… give it a few minutes\nCheck your downloads file and unzip"
+    "text": "Go to https://download-directory.github.io\n\n\n\nGo to the folder you need for your Lab. For example copy: https://github.com/pietrostefani/gds/tree/main/data/London\n\n\n\nPaste it in the green box… give it a few minutes\nCheck your downloads file and unzip",
+    "crumbs": [
+      "Introduction",
+      "Download data folders from GitHub"
+    ]
   },
   {
     "objectID": "quarto-notebooks/spatial-data.html#packages-and-modules",
@@ -285,5 +305,181 @@
     "title": "Geographic Data Science for Applied Economists",
     "section": "",
     "text": "Welcome\n\nThis is the website for the “Geographic Data Science for applied economists using Python”. This module is delivered by Dr. Carmen Cabrera-Arnau from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. The course material has been designed by Prof. Dani Arribas-Bel, Prof. Diego Puga and Dr. Carmen Cabrera-Arnau.\n\n\n\n\n\n\n\nNote\n\n\n\nA PDF version of this course is available for download here.\n\n\n\n\nContact\n\n\n\n\nCarmen Cabrera-Arnau - c.cabrera-arnau [at] liverpool.ac.uk - Lecturer in Geographic Data Science - Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, UK.\n\n\nDani Arribas-Bel - D.Arribas-Bel [at] liverpool.ac.uk - Professor in Geographic Data Science - Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, UK.\n\n\nDiego Puga - diego.puga [at] cemfi.es - Professor - CEMFI, Casado del Alisal 5, 28014 Madrid, Spain."
+  },
+  {
+    "objectID": "quarto-notebooks/environPy.html",
+    "href": "quarto-notebooks/environPy.html",
+    "title": "Environment",
+    "section": "",
+    "text": "Coding language\nThis course is primarily designed to introduce Geographic Data Science using Python as the core programming language. All course materials, assignments, and exercises are built with Python in mind, ensuring consistency and clarity throughout the learning process. Python was selected for its versatility, extensive libraries, and widespread use in the Geographic Data Science field, making it an excellent choice for both beginners and advanced users. If you are curious about conducting similar geospatial analyses in R, you can access additional resources here. However, for this course, all work should be completed in Python and following the environment setup that we introduce below.",
+    "crumbs": [
+      "Introduction",
+      "Environment"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/spatial-feature-ii.html",
+    "href": "quarto-notebooks/spatial-feature-ii.html",
+    "title": "4  Spatial feature engineering (part II)",
+    "section": "",
+    "text": "4.1 Packages and modules\nimport pandas, geopandas\nimport numpy as np\nimport contextily\nimport tobler\nimport matplotlib.pyplot as plt",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Spatial feature engineering (part II)</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/spatial-feature-ii.html#data",
+    "href": "quarto-notebooks/spatial-feature-ii.html#data",
+    "title": "4  Spatial feature engineering (part II)",
+    "section": "4.2 Data",
+    "text": "4.2 Data\nIf you want to read more about the data sources behind this dataset, head to the Datasets section.\nAssuming you have the file locally on the path ../data/:\n\npts = geopandas.read_file(\"../data/madrid_abb.gpkg\")\n\nWe will be working with a modified version of pts:\n\nSince we will require distance calculations, we will switch to the Spanish official projection\nTo make calculations in the illustration near-instantaneous, we will work with a smaller (random) sample of Airbnb properties (10% of the total)\n\n\ndb = pts.sample(\n    frac=0.1, random_state=123\n).to_crs(epsg=25830)\n\nAs you can see in the description, the new CRS is expressed in metres:\n\ndb.crs\n\n&lt;Projected CRS: EPSG:25830&gt;\nName: ETRS89 / UTM zone 30N\nAxis Info [cartesian]:\n- E[east]: Easting (metre)\n- N[north]: Northing (metre)\nArea of Use:\n- name: Europe between 6°W and 0°W: Faroe Islands offshore; Ireland - offshore; Jan Mayen - offshore; Norway including Svalbard - offshore; Spain - onshore and offshore.\n- bounds: (-6.0, 35.26, 0.01, 80.49)\nCoordinate Operation:\n- name: UTM zone 30N\n- method: Transverse Mercator\nDatum: European Terrestrial Reference System 1989 ensemble\n- Ellipsoid: GRS 1980\n- Prime Meridian: Greenwich",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Spatial feature engineering (part II)</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/spatial-feature-ii.html#distance-buffers",
+    "href": "quarto-notebooks/spatial-feature-ii.html#distance-buffers",
+    "title": "4  Spatial feature engineering (part II)",
+    "section": "4.3 Distance buffers",
+    "text": "4.3 Distance buffers\nHow many Airbnb’s are within 500m of each Airbnb?\n\nfrom pysal.lib import weights\n\nUsing DistanceBand, we can build a spatial weights matrix that assigns 1 to each observation within 500m, and 0 otherwise.\n\nw500m = weights.DistanceBand.from_dataframe(\n    db, threshold=500, binary=True\n)\n\n/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/libpysal/weights/weights.py:224: UserWarning:\n\nThe weights matrix is not fully connected: \n There are 86 disconnected components.\n There are 47 islands with ids: 6878, 16772, 15006, 1336, 3168, 15193, 1043, 5257, 4943, 12849, 10609, 11309, 10854, 10123, 3388, 9380, 10288, 13071, 3523, 15316, 3856, 205, 7720, 10454, 18307, 3611, 12405, 10716, 14813, 15467, 1878, 16597, 14329, 7933, 16215, 13525, 13722, 11932, 14456, 8848, 15197, 8277, 9922, 13072, 13852, 5922, 17151.\n\n\n\nThe number of neighbors can be accessed through the cardinalities attribute:\n\nn_neis = pandas.Series(w500m.cardinalities)\nn_neis.head()\n\n11297    213\n2659       5\n16242     21\n15565      9\n14707    159\ndtype: int64\n\n\n\nfig, ax = plt.subplots()\n\ndb.assign(\n    n_neis=n_neis\n).plot(\"n_neis\", markersize=0.1, ax=ax)\n\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nChallenge: Calculate the number of AirBnb properties within 250m of each other property. What is the average?",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Spatial feature engineering (part II)</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/spatial-feature-ii.html#distance-rings",
+    "href": "quarto-notebooks/spatial-feature-ii.html#distance-rings",
+    "title": "4  Spatial feature engineering (part II)",
+    "section": "4.4 Distance rings",
+    "text": "4.4 Distance rings\nHow many Airbnb’s are between 500m and 1km of each Airbnb?\n\nw1km = weights.DistanceBand.from_dataframe(\n    db, threshold=1000, binary=True\n)\n\n/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/libpysal/weights/weights.py:224: UserWarning:\n\nThe weights matrix is not fully connected: \n There are 20 disconnected components.\n There are 5 islands with ids: 4943, 12849, 15467, 13525, 11932.\n\n\n\nNow, we could do simply a subtraction:\n\nn_ring_neis = pandas.Series(w1km.cardinalities) - n_neis\n\nOr, if we need to know which is which, we can use set operations on weights:\n\nw_ring = weights.w_difference(w1km, w500m, constrained=False)\n\n/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/libpysal/weights/weights.py:224: UserWarning:\n\nThe weights matrix is not fully connected: \n There are 34 disconnected components.\n There are 23 islands with ids: 3744, 4143, 4857, 4943, 6986, 8345, 8399, 9062, 10592, 10865, 11574, 11613, 11785, 11840, 11932, 12015, 12635, 12714, 12849, 13091, 13317, 13525, 15467.\n\n\n\nAnd we can confirm they’re both the same:\n\n(pandas.Series(w_ring.cardinalities) - n_ring_neis).sum()\n\n0\n\n\n\n\n\n\n\n\nNote\n\n\n\nChallenge: Can you create a plot with the following two lines?\n\nOne depicting the average number of properties within a range of 50m, 100m, 250m, 500m, 750m\nAnother one with the increase of average neighbors for the same distances above",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Spatial feature engineering (part II)</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/spatial-feature-ii.html#cluster-membership-points",
+    "href": "quarto-notebooks/spatial-feature-ii.html#cluster-membership-points",
+    "title": "4  Spatial feature engineering (part II)",
+    "section": "4.5 Cluster membership (points)",
+    "text": "4.5 Cluster membership (points)\nWe can use the spatial configuration of observations to classify them as part of clusters or not, which can then be encoded, for example, as dummy variables in a model.\nWe will learn a method to identify clusters of points, based on their density across space. To do this, we will use the widely used DBSCAN algorithm. For this method, a cluster is a concentration of at least min_pts points, each of them within a distance eps of at least one other point in the cluster. Points in the dataset are then divided into three categories:\n\nNoise, for those points outside a cluster.\nCores, for those points inside a cluster whith at least min_pts points in the cluster within distance eps.\nBorders for points inside a cluster with less than min_pts other points in the cluster within distance eps.\n\nBoth min_pts and eps need to be prespecified by the user before running DBSCAN. This is a critical, as the value of these parameters can influence significantly the final result. For more on this, check here. Before exploring this in greater depth, let us get a first run at computing DBSCAN in Python, with eps = 500 and a minimum of min_pct = 2% of points for a candidate cluster to be considered so.\n\nfrom sklearn.cluster import DBSCAN\n\nmin_pct = 2\nmin_pts = len(db) * min_pct // 100\neps = 500\n\nWe will illustrate it with a minimum number of points of min_pct % of the sample and a maximum radious of eps metres.\n\nmodel = DBSCAN(min_samples=min_pts, eps=eps)\n\nOnce ready, we “fit” it to our data, but note that we first need to express the longitude and latitude of our points in metres.\n\ndb['x'] = db.geometry.x\ndb['y'] = db.geometry.y\nmodel.fit(\n    db[['x', 'y']]\n);\n\nWe will attach the labels to db for easy access:\n\ndb[\"labels\"] = model.labels_\n\nWe can define boundaries to turn point clusters into polygons if that fits our needs better:\nThe code in the next cell is a bit more advanced than expected for this course, but is used here as an illustration.\n\nfrom pysal.lib import cg\n\nboundaries = []\ncl_ids = [i for i in db[\"labels\"].unique() if i!=-1]\nfor cl_id in cl_ids:\n    sub = db.query(f\"labels == {cl_id}\")\n    cluster_boundaries = cg.alpha_shape_auto(\n        np.array(\n            [sub.geometry.x, sub.geometry.y]\n        ).T,\n    )\n    boundaries.append(cluster_boundaries)\nboundaries = geopandas.GeoSeries(\n    boundaries, index=cl_ids, crs=db.crs\n)\n\nAnd we can see what the clusters look like:\n\nfig, ax = plt.subplots()\n\ndb.to_crs(\n    epsg=3857\n).plot(\n    markersize=0.1, color=\"lime\", ax=ax\n)\nboundaries.to_crs(\n    epsg=3857\n).plot(\n    ax=ax, edgecolor=\"red\", facecolor=\"none\"\n)\n\ncontextily.add_basemap(\n    ax,\n    source=contextily.providers.CartoDB.DarkMatterNoLabels\n)\n\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nChallenge: How does the map above change if you require 5% of points instead of 2% for a candidate cluster to be considered so?",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Spatial feature engineering (part II)</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/spatial-feature-ii.html#cluster-membership-polygons",
+    "href": "quarto-notebooks/spatial-feature-ii.html#cluster-membership-polygons",
+    "title": "4  Spatial feature engineering (part II)",
+    "section": "4.6 Cluster membership (polygons)",
+    "text": "4.6 Cluster membership (polygons)\nWe can take a similar approach as above if we have polygon geographies instead of points. Rather than using DBSCAN, here we can rely on local indicators of spatial association (LISAs) to pick up spatial concentrations of high or low values.\nFor the illustration, we will aggregate the location of Airbnb properties to a regular hexagonal grid, similar to how we generated it when transferring from polygons to polygons. First we create a polygon covering the extent of points:\n\none = geopandas.GeoSeries(\n    [cg.alpha_shape_auto(\n        np.array(\n            [db.geometry.x, db.geometry.y]\n        ).T,\n    )],\n    crs=db.crs\n)\n\nThen we can tessellate:\n\nabb_hex = tobler.util.h3fy(\n    one, resolution=8\n)\n\n/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning:\n\nYou will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems\n\n\n\nAnd obtain a count of points in each polygon:\n\ncounts = geopandas.sjoin(\n    db, abb_hex\n).groupby(\n    \"index_right\"\n).size()\n\nabb_hex[\"count\"] = counts\nabb_hex[\"count\"] = abb_hex[\"count\"].fillna(0)\n\nfig, ax = plt.subplots()\n\nabb_hex.plot(\"count\", scheme=\"fisherjenks\", ax=ax)\n\nplt.show()\n\n\n\n\n\n\n\n\nTo identify spatial clusters, we rely on esda:\n\nfrom pysal.explore import esda\n\n/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/spaghetti/network.py:40: FutureWarning:\n\nThe next major release of pysal/spaghetti (2.0.0) will drop support for all ``libpysal.cg`` geometries. This change is a first step in refactoring ``spaghetti`` that is expected to result in dramatically reduced runtimes for network instantiation and operations. Users currently requiring network and point pattern input as ``libpysal.cg`` geometries should prepare for this simply by converting to ``shapely`` geometries.\n\n/Users/carmen/anaconda3/envs/geo-env-new/lib/python3.10/site-packages/tqdm/auto.py:22: TqdmWarning:\n\nIProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html\n\n\n\nAnd compute the LISA statistics:\n\nw = weights.Queen.from_dataframe(abb_hex)\nlisa = esda.Moran_Local(abb_hex[\"count\"], w)\n\n/var/folders/79/65l52xsj7vq_4_t_l6k5bl2c0000gn/T/ipykernel_2582/2473509840.py:1: FutureWarning:\n\n`use_index` defaults to False but will default to True in future. Set True/False directly to control this behavior and silence this warning\n\n\n\nFor a visual inspection of the clusters, splot:\n\nfrom pysal.viz import splot\nfrom splot.esda import lisa_cluster\n\n\nlisa_cluster(lisa, abb_hex, p=0.01)\nplt.show()\n\n\n\n\n\n\n\n\nAnd, if we want to extract the labels for each polygon, we can do so from the lisa object:\n\nlisa.q * (lisa.p_sim &lt; 0.01)\n\narray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 3, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 3,\n       0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0,\n       0, 3, 0, 3, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0,\n       0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0,\n       0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 3, 0, 0, 1, 0, 3, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0,\n       0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3, 3, 0, 0])",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Spatial feature engineering (part II)</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/spatial-feature-ii.html#next-steps",
+    "href": "quarto-notebooks/spatial-feature-ii.html#next-steps",
+    "title": "4  Spatial feature engineering (part II)",
+    "section": "4.7 Next steps",
+    "text": "4.7 Next steps\nIf you want a bit more background into some of the techniques reviewed in this block, the following might be of interest:\n\nThis block of the GDS Course (Pietrostefani and Cabrera-Arnau 2024) will introduce you to more techniques like the LISAs seen above to explore the spatial dimension of the statistical properties of your data. If you want a more detailed read, this Chapter of the GDS Book (Rey, Arribas-Bel, and Wolf forthcoming) will do just that.\nThis block of the GDS Course (Pietrostefani and Cabrera-Arnau 2024) will introduce you to more techniques for exploring point patterns. If you want a more comprehensive read, this Chapter of the GDS Book (Rey, Arribas-Bel, and Wolf forthcoming) will do just that.\n\n\n\n\n\nPietrostefani, Elisabetta, and Carmen Cabrera-Arnau. 2024. “A Course in Geographic Data Science.” https://pietrostefani.github.io/gds/.\n\n\nRey, Sergio J., Daniel Arribas-Bel, and Levi J. Wolf. forthcoming. Geographic Data Science with PySAL and the PyData Stack. CRC press.",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Spatial feature engineering (part II)</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/openstreetmap.html",
+    "href": "quarto-notebooks/openstreetmap.html",
+    "title": "5  OpenStreetMap",
+    "section": "",
+    "text": "5.1 Packages and modules\nimport geopandas\nimport contextily\nimport matplotlib.pyplot as plt\nfrom IPython.display import GeoJSON",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>OpenStreetMap</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/openstreetmap.html#data",
+    "href": "quarto-notebooks/openstreetmap.html#data",
+    "title": "5  OpenStreetMap",
+    "section": "5.2 Data",
+    "text": "5.2 Data\nSince some of the query options we will discuss involve pre-defined extents, we will read the Madrid neighbourhoods dataset first.\nAssuming you have the file locally on the path ../data/:\n\nneis = geopandas.read_file(\"../data/neighbourhoods.geojson\")\n\nTo make some of the examples below computationally easier on OpenStreetMap servers, we will single out the smallest neighborhood:\n\nareas = neis.to_crs(\n    epsg=32630\n).area\n\nsmallest = neis[areas == areas.min()]\nsmallest\n\n\n\n\n\n\n\n\nneighbourhood\nneighbourhood_group\ngeometry\n\n\n\n\n98\nAtalaya\nCiudad Lineal\nMULTIPOLYGON (((-3.66195 40.46338, -3.66364 40...\n\n\n\n\n\n\n\n\nfig, ax = plt.subplots()\n\nsmallest.plot(\n    facecolor=\"none\", edgecolor=\"blue\", linewidth=2, ax=ax\n)\n\ncontextily.add_basemap(\n    ax, \n    crs=smallest.crs, \n    source=contextily.providers.OpenStreetMap.Mapnik\n)\n\nplt.show()",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>OpenStreetMap</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/openstreetmap.html#osmnx",
+    "href": "quarto-notebooks/openstreetmap.html#osmnx",
+    "title": "5  OpenStreetMap",
+    "section": "5.3 osmnx",
+    "text": "5.3 osmnx\nLet’s import one more package, osmnx, designed to easily download, model, analyse, and visualise street networks and other geospatial features from OpenStreetMap.\n\nimport osmnx as ox\n\nHere is a trick (courtesy of Martin Fleischmann to pin all your queries to OpenStreetMap to a specific date, so results are always reproducible, even if the map changes in the meantime.\n\nox.settings.overpass_settings = (\n    '[out:json][timeout:90][date:\"2021-03-07T00:00:00Z\"]'\n)\n\n\n\n\n\n\n\nNote\n\n\n\nMuch of the methods covered here rely on the osmnx.features module. Check out its reference here.\n\n\nThere are two broad areas to keep in mind when querying data on OpenStreetMap through osmnx:\n\nThe interface to specify the extent of the search.\nThe nature of the entities being queried. Here, the interface relies entirely on OpenStreetMap’s tagging system. Given the distributed nature of the project, this is variable, but a good place to start is:\n\n\nhttps://wiki.openstreetmap.org/wiki/Tags\n\nGenerally, the interface we will follow involves the following:\nreceived_entities = ox.features_from_XXX(\n    &lt;extent&gt;, tags={&lt;key&gt;: True/&lt;value(s)&gt;}, ...\n)\nThe &lt;extent&gt; can take several forms. We can print out the available forms:\n\n[i for i in dir(ox) if \"features_from_\" in i]\n\n['features_from_address',\n 'features_from_bbox',\n 'features_from_place',\n 'features_from_point',\n 'features_from_polygon',\n 'features_from_xml']\n\n\nThe tags follow the official feature spec.",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>OpenStreetMap</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/openstreetmap.html#buildings",
+    "href": "quarto-notebooks/openstreetmap.html#buildings",
+    "title": "5  OpenStreetMap",
+    "section": "5.4 Buildings",
+    "text": "5.4 Buildings\n\nblgs = ox.features_from_polygon(\n    smallest.squeeze().geometry, tags={\"building\": True}\n)\n\n\nfig, ax = plt.subplots()\n\nblgs.plot(ax=ax)\n\nplt.show()\n\n\n\n\n\n\n\n\n\nblgs.info()\n\n&lt;class 'geopandas.geodataframe.GeoDataFrame'&gt;\nMultiIndex: 115 entries, ('way', 442595762) to ('way', 577690922)\nData columns (total 27 columns):\n #   Column            Non-Null Count  Dtype   \n---  ------            --------------  -----   \n 0   name              2 non-null      object  \n 1   amenity           2 non-null      object  \n 2   geometry          115 non-null    geometry\n 3   nodes             115 non-null    object  \n 4   building          115 non-null    object  \n 5   addr:housenumber  21 non-null     object  \n 6   addr:postcode     3 non-null      object  \n 7   addr:street       9 non-null      object  \n 8   denomination      1 non-null      object  \n 9   phone             2 non-null      object  \n 10  religion          1 non-null      object  \n 11  source            1 non-null      object  \n 12  source:date       1 non-null      object  \n 13  url               1 non-null      object  \n 14  wheelchair        1 non-null      object  \n 15  building:levels   11 non-null     object  \n 16  addr:city         8 non-null      object  \n 17  addr:country      6 non-null      object  \n 18  wikidata          1 non-null      object  \n 19  website           1 non-null      object  \n 20  country           1 non-null      object  \n 21  diplomatic        1 non-null      object  \n 22  name:en           1 non-null      object  \n 23  name:fr           1 non-null      object  \n 24  name:ko           1 non-null      object  \n 25  office            1 non-null      object  \n 26  target            1 non-null      object  \ndtypes: geometry(1), object(26)\nmemory usage: 29.7+ KB\n\n\n\nblgs.head()\n\n\n\n\n\n\n\n\n\nname\namenity\ngeometry\nnodes\nbuilding\naddr:housenumber\naddr:postcode\naddr:street\ndenomination\nphone\n...\naddr:country\nwikidata\nwebsite\ncountry\ndiplomatic\nname:en\nname:fr\nname:ko\noffice\ntarget\n\n\nelement_type\nosmid\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nway\n442595762\nNaN\nNaN\nPOLYGON ((-3.66377 40.46317, -3.66363 40.46322...\n[4402722774, 4402722775, 4402722776, 440272277...\nyes\nNaN\nNaN\nNaN\nNaN\nNaN\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n442595763\nNaN\nNaN\nPOLYGON ((-3.66394 40.46346, -3.66415 40.46339...\n[4402722778, 4402722779, 4402722780, 440272278...\nyes\nNaN\nNaN\nNaN\nNaN\nNaN\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n442595764\nNaN\nNaN\nPOLYGON ((-3.66379 40.46321, -3.66401 40.46314...\n[4402722782, 4402722783, 4402722784, 440272278...\nyes\nNaN\nNaN\nNaN\nNaN\nNaN\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n442595765\nNaN\nNaN\nPOLYGON ((-3.66351 40.46356, -3.66294 40.46371...\n[4402722786, 4402722787, 4402722788, 440272278...\nyes\nNaN\nNaN\nNaN\nNaN\nNaN\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n442596830\nNaN\nNaN\nPOLYGON ((-3.66293 40.46289, -3.66281 40.46294...\n[4402729658, 4402729659, 4402729660, 440272966...\nyes\nNaN\nNaN\nNaN\nNaN\nNaN\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n\n\n5 rows × 27 columns\n\n\n\nIf you want to visit the entity online, you can do so at:\n\nhttps://www.openstreetmap.org/&lt;unique_id&gt;\n\n\n\n\n\n\n\nNote\n\n\n\nChallenge: Extract the building footprints for the Sol neighbourhood in neis.",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>OpenStreetMap</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/openstreetmap.html#other-polygons",
+    "href": "quarto-notebooks/openstreetmap.html#other-polygons",
+    "title": "5  OpenStreetMap",
+    "section": "5.5 Other polygons",
+    "text": "5.5 Other polygons\n\npark = ox.features_from_place(\n    \"Parque El Retiro, Madrid\", tags={\"leisure\": \"park\"}\n)\n\n\nfig, ax = plt.subplots()\n\npark.plot(\n    facecolor=\"none\", edgecolor=\"blue\", linewidth=2, ax=ax\n)\n\ncontextily.add_basemap(\n    ax, \n    crs=smallest.crs, \n    source=contextily.providers.OpenStreetMap.Mapnik\n)\n\nplt.show()",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>OpenStreetMap</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/openstreetmap.html#points-of-interest",
+    "href": "quarto-notebooks/openstreetmap.html#points-of-interest",
+    "title": "5  OpenStreetMap",
+    "section": "5.6 Points of interest",
+    "text": "5.6 Points of interest\nBars around Atocha station:\n\nbars = ox.features_from_address(\n    \"Puerta de Atocha, Madrid\", tags={\"amenity\": \"bar\"}, dist=1500\n)\n\nWe can quickly explore with GeoJSON:\n\nbars.explore()\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\nAnd stores within Malasaña:\n\nshops = ox.features_from_address(\n    \"Malasaña, Madrid, Spain\", # Boundary to search within\n    tags={\n        \"shop\": True,\n        \"landuse\": [\"retail\", \"commercial\"],\n        \"building\": \"retail\"\n    },\n    dist=1000\n)\n\nshops.explore()\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\nWe use features_from_place for delineated areas (“polygonal entities”):\n\ncs = ox.features_from_place(\n    \"Madrid, Spain\",\n    tags={\"amenity\": \"charging_station\"}\n)\n\ncs.explore()\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\nSimilarly, we can work with location data. For example, searches around a given point:\n\nbakeries = ox.features_from_point(\n    (40.418881103417675, -3.6920446157455444),\n    tags={\"shop\": \"bakery\", \"craft\": \"bakery\"},\n    dist=500\n)\n\nbakeries.explore()\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n\n\n\n\n\nNote\n\n\n\nChallenge:\n\nHow many music shops does OSM record within 750 metres of Puerta de Alcalá?\n\n- Are there more restaurants or clothing shops within the polygon that represents the Pacífico neighbourhood in neis table?",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>OpenStreetMap</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/openstreetmap.html#streets",
+    "href": "quarto-notebooks/openstreetmap.html#streets",
+    "title": "5  OpenStreetMap",
+    "section": "5.7 Streets",
+    "text": "5.7 Streets\nStreet data can be obtained as another type of entity, as above; or as a graph object.\n\n5.7.1 Geo-tables\n\ncentro = ox.features_from_polygon(\n    neis.query(\"neighbourhood == 'Sol'\").squeeze().geometry,\n    tags={\"highway\": True}\n)\n\nWe can get a quick peak into what is returned (in grey), compared to the region we used for the query:\n\nfig, ax = plt.subplots()\n\nneis.query(\n    \"neighbourhood == 'Sol'\"\n).plot(color=\"k\", ax=ax)\n\ncentro.plot(\n    ax=ax, \n    color=\"0.5\", \n    linewidth=0.2, \n    markersize=0.5\n)\n\nplt.show()\n\n\n\n\n\n\n\n\nThis however will return all sorts of things:\n\ncentro.geometry\n\nelement_type  osmid    \nnode          21734214                             POINT (-3.70427 40.41662)\n              21734250                             POINT (-3.70802 40.41612)\n              21734252                             POINT (-3.70847 40.41677)\n              21968134                             POINT (-3.69945 40.41786)\n              21968197                             POINT (-3.70054 40.41645)\n                                                 ...                        \nway           907553665    LINESTRING (-3.70686 40.41380, -3.70719 40.41369)\n              909056211    LINESTRING (-3.70705 40.42021, -3.70680 40.42020)\nrelation      5662178      POLYGON ((-3.70948 40.41551, -3.70952 40.41563...\n              7424032      POLYGON ((-3.70263 40.41712, -3.70253 40.41714...\n              8765884      POLYGON ((-3.70636 40.41475, -3.70635 40.41481...\nName: geometry, Length: 609, dtype: geometry\n\n\n\n\n5.7.2 Spatial graphs\nThe graph_from_XXX() functions return clean, processed graph objects for the street network. Available options are:\n\n[i for i in dir(ox) if \"graph_from_\" in i]\n\n['graph_from_address',\n 'graph_from_bbox',\n 'graph_from_gdfs',\n 'graph_from_place',\n 'graph_from_point',\n 'graph_from_polygon',\n 'graph_from_xml']\n\n\nHere is an example:\n\ncentro_gr = ox.graph_from_polygon(\n    neis.query(\"neighbourhood == 'Sol'\").squeeze().geometry,\n)\n\nThis is indeed a graph object (as defined by the networkx package):\n\ncentro_gr\n\n&lt;networkx.classes.multidigraph.MultiDiGraph at 0x153a19810&gt;\n\n\nTo visualise it, there are several plotting options:\n\n[i for i in dir(ox) if \"plot_graph\" in i]\n\n['plot_graph', 'plot_graph_folium', 'plot_graph_route', 'plot_graph_routes']\n\n\nFor example:\n\nox.plot_figure_ground(centro_gr)\nplt.show()\n\n\n\n\n\n\n\n\n\nox.graph_to_gdfs(centro_gr, nodes=False).explore()\n\nMake this Notebook Trusted to load map: File -&gt; Trust Notebook\n\n\n\n\n\n\n\n\nNote\n\n\n\nChallenge: How many bookshops are within a 50m radious of the Paseo de la Castellana?\nThis one involves the following steps:\n\nExtracting the street segment for Paseo de la Castellana\nDrawing a 50m buffer around it\nQuerying OSM for bookshops",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>OpenStreetMap</span>"
+    ]
+  },
+  {
+    "objectID": "quarto-notebooks/openstreetmap.html#next-steps",
+    "href": "quarto-notebooks/openstreetmap.html#next-steps",
+    "title": "5  OpenStreetMap",
+    "section": "5.8 Next steps",
+    "text": "5.8 Next steps\nIf you found the content in this block useful, the following resources represent some suggestions on where to go next:\n\nParts of the block are inspired and informed by Geoff Boeing’s excellent course on Urban Data Science\nMore in depth content about osmnx is available in the official examples collection\nBoeing (2020) {cite}boeing2020exploring illustrates how OpenStreetMap can be used to analyse urban form (Open Access)\n\n\n\n\n\nAnderson, Jennings, Dipto Sarkar, and Leysia Palen. 2019. “Corporate Editors in the Evolving Landscape of OpenStreetMap.” ISPRS International Journal of Geo-Information 8 (5): 232.",
+    "crumbs": [
+      "Contents",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>OpenStreetMap</span>"
+    ]
   }
 ]

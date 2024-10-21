@@ -122,7 +122,13 @@ And we can confirm they're both the same:
 
 We can use the spatial configuration of observations to classify them as part of clusters or not, which can then be encoded, for example, as dummy variables in a model.
 
-These *magic* numbers need to be pre-set and you can play with both `min_pct` (or `min_pts` directly) and `eps` to see how they affect the results (spoiler: a lot!).
+We will learn a method to identify clusters of points, based on their density across space. To do this, we will use the widely used `DBSCAN` algorithm. For this method, a cluster is a concentration of at least `min_pts` points, each of them within a distance `eps` of at least one other point in the cluster. Points in the dataset are then divided into three categories:
+
+-   *Noise*, for those points outside a cluster.
+-   *Cores*, for those points inside a cluster whith at least `min_pts` points in the cluster within distance `eps`.
+-   *Borders* for points inside a cluster with less than `min_pts` other points in the cluster within distance `eps`.
+
+Both `min_pts` and eps need to be prespecified by the user before running `DBSCAN`. This is a critical, as the value of these parameters can influence significantly the final result. For more on this, check [here](https://scikit-learn.org/stable/modules/clustering.html). Before exploring this in greater depth, let us get a first run at computing `DBSCAN` in Python, with `eps` = 500 and a minimum of `min_pct` = 2% of points for a candidate cluster to be considered so.
 
 ```{python}
 from sklearn.cluster import DBSCAN
@@ -136,12 +142,15 @@ We will illustrate it with a minimum number of points of `min_pct` % of the samp
 
 ```{python}
 model = DBSCAN(min_samples=min_pts, eps=eps)
+```
+
+Once ready, we “fit” it to our data, but note that we first need to express the longitude and latitude of our points in metres.
+
+```{python}
+db['x'] = db.geometry.x
+db['y'] = db.geometry.y
 model.fit(
-    db.assign(
-        x=db.geometry.x
-    ).assign(
-        y=db.geometry.y
-    )[['x', 'y']]
+    db[['x', 'y']]
 );
 ```
 
